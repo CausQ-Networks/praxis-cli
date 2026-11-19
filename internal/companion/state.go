@@ -3,7 +3,7 @@ package companion
 import (
 	"fmt"
 
-	"github.com/fosrl/cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
 )
 
 // State describes the resolved companion mode for the current process.

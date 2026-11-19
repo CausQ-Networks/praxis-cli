@@ -1,6 +1,6 @@
 package companion
 
-import "github.com/fosrl/cli/internal/config"
+import "github.com/CausQ-Networks/praxis-cli/internal/config"
 
 // Provider loads authentication state from a desktop application.
 type Provider interface {

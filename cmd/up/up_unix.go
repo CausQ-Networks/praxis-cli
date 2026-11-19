@@ -3,8 +3,8 @@
 package up
 
 import (
-	"github.com/fosrl/cli/cmd/up/client"
-	"github.com/fosrl/cli/cmd/up/site"
+	"github.com/CausQ-Networks/praxis-cli/cmd/up/client"
+	"github.com/CausQ-Networks/praxis-cli/cmd/up/site"
 	"github.com/spf13/cobra"
 )
 

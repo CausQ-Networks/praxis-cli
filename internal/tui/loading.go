@@ -8,8 +8,8 @@ import (
 	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/fosrl/cli/internal/logger"
-	"github.com/fosrl/cli/internal/olm"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/olm"
 )
 
 // ExitCondition determines if the loading indicator should exit.

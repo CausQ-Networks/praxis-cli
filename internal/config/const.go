@@ -5,7 +5,7 @@ package config
 //
 // This value can be overridden at build time using ldflags:
 //
-//	go build -ldflags "-X github.com/fosrl/cli/internal/config.ManagedBy=<manager>"
+//	go build -ldflags "-X github.com/CausQ-Networks/praxis-cli/internal/config.ManagedBy=<manager>"
 var ManagedBy = "none"
 
 func IsExternallyManaged() bool {

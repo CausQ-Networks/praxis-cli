@@ -7,9 +7,9 @@ import (
 	"sort"
 	"time"
 
-	"github.com/fosrl/cli/internal/logger"
-	"github.com/fosrl/cli/internal/olm"
-	"github.com/fosrl/cli/internal/utils"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/olm"
+	"github.com/CausQ-Networks/praxis-cli/internal/utils"
 	"github.com/spf13/cobra"
 )
 

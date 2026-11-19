@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/fosrl/cli/cmd"
-	"github.com/fosrl/cli/internal/svcmgr"
+	"github.com/CausQ-Networks/praxis-cli/cmd"
+	"github.com/CausQ-Networks/praxis-cli/internal/svcmgr"
 )
 
 func main() {

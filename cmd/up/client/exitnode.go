@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/fosrl/cli/internal/api"
+	"github.com/CausQ-Networks/praxis-cli/internal/api"
 )
 
 // resolveExitNodeByNiceID returns the resource ID and current site IDs of the

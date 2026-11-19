@@ -16,14 +16,15 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/fosrl/cli/internal/api"
-	"github.com/fosrl/cli/internal/config"
-	"github.com/fosrl/cli/internal/fingerprint"
-	"github.com/fosrl/cli/internal/logger"
-	"github.com/fosrl/cli/internal/olm"
-	"github.com/fosrl/cli/internal/tui"
-	"github.com/fosrl/cli/internal/utils"
-	versionpkg "github.com/fosrl/cli/internal/version"
+	"github.com/CausQ-Networks/praxis-cli/internal/api"
+	"github.com/CausQ-Networks/praxis-cli/internal/branding"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/fingerprint"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/olm"
+	"github.com/CausQ-Networks/praxis-cli/internal/tui"
+	"github.com/CausQ-Networks/praxis-cli/internal/utils"
+	versionpkg "github.com/CausQ-Networks/praxis-cli/internal/version"
 	newtLogger "github.com/fosrl/newt/logger"
 	olmpkg "github.com/fosrl/olm/olm"
 	"github.com/spf13/cobra"
@@ -106,22 +107,22 @@ logs, and removes the service again when you press Ctrl+C.`,
 			// without putting them on the command line, where they'd be
 			// visible to any local user via `ps`.
 			if !cmd.Flags().Changed("id") {
-				if v := os.Getenv("PANGOLIN_CLIENT_ID"); v != "" {
+				if v := branding.FirstEnv("PRAXIS_CLIENT_ID", "PANGOLIN_CLIENT_ID"); v != "" {
 					opts.ID = v
 				}
 			}
 			if !cmd.Flags().Changed("secret") {
-				if v := os.Getenv("PANGOLIN_CLIENT_SECRET"); v != "" {
+				if v := branding.FirstEnv("PRAXIS_CLIENT_SECRET", "PANGOLIN_CLIENT_SECRET"); v != "" {
 					opts.Secret = v
 				}
 			}
 			if !cmd.Flags().Changed("endpoint") {
-				if v := os.Getenv("PRAXIS_ENDPOINT"); v != "" {
+				if v := branding.FirstEnv(branding.EndpointEnv, branding.LegacyEndpointEnv); v != "" {
 					opts.Endpoint = v
 				}
 			}
 			if !cmd.Flags().Changed("org") {
-				if v := os.Getenv("PANGOLIN_ORG"); v != "" {
+				if v := branding.FirstEnv("PRAXIS_ORG", "PANGOLIN_ORG"); v != "" {
 					opts.OrgID = v
 				}
 			}
@@ -212,7 +213,7 @@ logs, and removes the service again when you press Ctrl+C.`,
 // olmEnvFlagOverrides maps the environment variables read by the standalone
 // olm client (see olm/config.go's loadConfigFromEnv) to the corresponding
 // `up client` flag name. --id/--secret/--endpoint/--org are handled
-// separately above under the CLI's own PANGOLIN_CLIENT_ID/SECRET/ENDPOINT/ORG
+// separately above under the CLI's own PRAXIS_CLIENT_ID/SECRET/ENDPOINT/ORG
 // names, and --holepunch is handled separately below since it's inverted
 // relative to olm's DISABLE_HOLEPUNCH.
 var olmEnvFlagOverrides = []struct {

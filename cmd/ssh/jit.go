@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/fosrl/cli/internal/api"
-	"github.com/fosrl/cli/internal/sshkeys"
+	"github.com/CausQ-Networks/praxis-cli/internal/api"
+	"github.com/CausQ-Networks/praxis-cli/internal/sshkeys"
 )
 
 const (

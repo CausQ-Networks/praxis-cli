@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/fosrl/cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
 )
 
 const noticesFileName = "notices.json"

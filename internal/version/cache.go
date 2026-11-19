@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/fosrl/cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
 )
 
 const (

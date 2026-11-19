@@ -6,9 +6,9 @@ import (
 	"io"
 	"text/tabwriter"
 
-	"github.com/fosrl/cli/internal/api"
-	"github.com/fosrl/cli/internal/config"
-	"github.com/fosrl/cli/internal/utils"
+	"github.com/CausQ-Networks/praxis-cli/internal/api"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/utils"
 	"github.com/spf13/cobra"
 )
 

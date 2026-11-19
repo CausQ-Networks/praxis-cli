@@ -3,7 +3,7 @@ package ssh
 import (
 	"strconv"
 
-	"github.com/fosrl/cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
 )
 
 func sshPassThroughFromOS(osArgs []string, resourceID string) []string {

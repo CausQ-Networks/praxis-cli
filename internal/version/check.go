@@ -9,12 +9,13 @@ import (
 	"time"
 
 	"github.com/Masterminds/semver/v3"
-	"github.com/fosrl/cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/branding"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
 )
 
 const (
 	// VersionsAPIURL is the GitHub latest-release endpoint for Praxis CLI.
-	VersionsAPIURL = "https://api.github.com/repos/CausQ-Networks/praxis-cli/releases/latest"
+	VersionsAPIURL = branding.ReleasesAPIURL
 )
 
 // GitHubRelease represents a GitHub release

@@ -5,8 +5,9 @@ package client
 import (
 	"fmt"
 
-	"github.com/fosrl/cli/internal/logger"
-	"github.com/fosrl/cli/internal/svcmgr"
+	"github.com/CausQ-Networks/praxis-cli/internal/branding"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/svcmgr"
 )
 
 // runWindowsMachineClient makes `praxis up client` work on Windows by
@@ -22,11 +23,16 @@ import (
 // this is called (Windows only supports machine clients).
 func runWindowsMachineClient(opts *ClientUpCmdOpts) error {
 	envVars := map[string]string{
+		"PRAXIS_CLIENT_ID":       opts.ID,
+		"PRAXIS_CLIENT_SECRET":   opts.Secret,
 		"PANGOLIN_CLIENT_ID":     opts.ID,
 		"PANGOLIN_CLIENT_SECRET": opts.Secret,
-		"PRAXIS_ENDPOINT":      opts.Endpoint,
+	}
+	for k, v := range branding.EndpointEnvVars(opts.Endpoint) {
+		envVars[k] = v
 	}
 	if opts.OrgID != "" {
+		envVars["PRAXIS_ORG"] = opts.OrgID
 		envVars["PANGOLIN_ORG"] = opts.OrgID
 	}
 

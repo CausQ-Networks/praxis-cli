@@ -1,9 +1,9 @@
 package utils
 
 import (
-	"github.com/fosrl/cli/internal/api"
-	"github.com/fosrl/cli/internal/logger"
-	"github.com/fosrl/cli/internal/olm"
+	"github.com/CausQ-Networks/praxis-cli/internal/api"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/olm"
 )
 
 // ResolveSavedExitNode returns the resource ID and current site IDs of the exit

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/fosrl/cli/internal/api"
-	"github.com/fosrl/cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/api"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
 	"github.com/spf13/cobra"
 )
 

@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/fosrl/cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
 	dnsOverride "github.com/fosrl/olm/dns/override"
 	"github.com/spf13/cobra"
 )

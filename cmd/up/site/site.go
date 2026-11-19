@@ -17,8 +17,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/fosrl/cli/internal/config"
-	versionpkg "github.com/fosrl/cli/internal/version"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
+	versionpkg "github.com/CausQ-Networks/praxis-cli/internal/version"
 	"github.com/fosrl/newt/clients/permissions"
 	newtLogger "github.com/fosrl/newt/logger"
 	newtpkg "github.com/fosrl/newt/newt"

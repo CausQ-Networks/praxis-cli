@@ -5,9 +5,9 @@ import (
 	"strings"
 
 	"github.com/charmbracelet/lipgloss"
-	"github.com/fosrl/cli/internal/config"
-	"github.com/fosrl/cli/internal/logger"
-	"github.com/fosrl/cli/internal/version"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/version"
 )
 
 var (

@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/fosrl/cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
 	toml "github.com/pelletier/go-toml/v2"
 )
 
@@ -39,7 +39,7 @@ func writeCodexConfig(endpoint string, auth Auth) ([]string, error) {
 		"wire_api": "responses",
 	}
 	if auth.Mode == AuthModeKeyed {
-		pangolin["env_key"] = "PANGOLIN_API_KEY"
+		pangolin["env_key"] = "PRAXIS_API_KEY"
 	}
 	providers["praxis"] = pangolin
 
@@ -52,8 +52,8 @@ func writeCodexConfig(endpoint string, auth Auth) ([]string, error) {
 	}
 
 	if auth.Mode == AuthModeKeyed {
-		logger.Info("Codex reads its API key from the PANGOLIN_API_KEY environment variable; run:")
-		logger.Info("  %s", exportEnvVarCommand("PANGOLIN_API_KEY", auth.Key))
+		logger.Info("Codex reads its API key from the PRAXIS_API_KEY environment variable; run:")
+		logger.Info("  %s", exportEnvVarCommand("PRAXIS_API_KEY", auth.Key))
 	}
 
 	return []string{path}, nil
@@ -148,8 +148,8 @@ func resetCodexConfig() ([]string, error) {
 		return nil, err
 	}
 
-	logger.Info("If you set PANGOLIN_API_KEY for Codex, unset it; run:")
-	logger.Info("  %s", unsetEnvVarCommand("PANGOLIN_API_KEY"))
+	logger.Info("If you set PRAXIS_API_KEY for Codex, unset it; run:")
+	logger.Info("  %s", unsetEnvVarCommand("PRAXIS_API_KEY"))
 
 	return []string{path}, nil
 }

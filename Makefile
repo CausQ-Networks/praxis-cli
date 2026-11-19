@@ -6,7 +6,7 @@ OUTPUT_DIR=bin
 VERSION ?= dev
 NEWT_VERSION := $(shell go list -m -f '{{.Version}}' github.com/fosrl/newt | sed 's/^v//')
 OLM_VERSION := $(shell go list -m -f '{{.Version}}' github.com/fosrl/olm | sed 's/^v//')
-LDFLAGS = -s -w -X github.com/fosrl/cli/internal/version.Version=$(VERSION) -X github.com/fosrl/cli/internal/version.NewtVersionOverride=$(NEWT_VERSION) -X github.com/fosrl/cli/internal/version.OlmVersionOverride=$(OLM_VERSION)
+LDFLAGS = -s -w -X github.com/CausQ-Networks/praxis-cli/internal/version.Version=$(VERSION) -X github.com/CausQ-Networks/praxis-cli/internal/version.NewtVersionOverride=$(NEWT_VERSION) -X github.com/CausQ-Networks/praxis-cli/internal/version.OlmVersionOverride=$(OLM_VERSION)
 
 all: clean build
 

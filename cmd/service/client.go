@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/fosrl/cli/internal/logger"
-	"github.com/fosrl/cli/internal/svcmgr"
+	"github.com/CausQ-Networks/praxis-cli/internal/branding"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/svcmgr"
 	"github.com/spf13/cobra"
 )
 
@@ -40,12 +41,17 @@ mode (that's handled by the Praxis desktop app); the service runs the
 tunnel directly in-process instead.`,
 		Run: func(cmd *cobra.Command, args []string) {
 			envVars := map[string]string{
-				"PANGOLIN_CLIENT_ID":     opts.ID,
-				"PANGOLIN_CLIENT_SECRET": opts.Secret,
-				"PRAXIS_ENDPOINT":      opts.Endpoint,
+				"PRAXIS_CLIENT_ID":       opts.ID,
+				"PRAXIS_CLIENT_SECRET":   opts.Secret,
+				"PANGOLIN_CLIENT_ID":     opts.ID,     // legacy alias
+				"PANGOLIN_CLIENT_SECRET": opts.Secret, // legacy alias
+			}
+			for k, v := range branding.EndpointEnvVars(opts.Endpoint) {
+				envVars[k] = v
 			}
 			if opts.OrgID != "" {
-				envVars["PANGOLIN_ORG"] = opts.OrgID
+				envVars["PRAXIS_ORG"] = opts.OrgID
+				envVars["PANGOLIN_ORG"] = opts.OrgID // legacy alias
 			}
 
 			spec := svcmgr.Spec{

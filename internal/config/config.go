@@ -11,7 +11,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/fosrl/cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/branding"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
 	"github.com/spf13/viper"
 )
 
@@ -166,7 +167,7 @@ func newConfigViper() (*viper.Viper, error) {
 	}
 
 	// Bind to environment variables of the same name
-	v.SetEnvPrefix("PANGOLIN_CLI")
+	v.SetEnvPrefix(branding.EnvPrefix)
 	v.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	v.AutomaticEnv()
 

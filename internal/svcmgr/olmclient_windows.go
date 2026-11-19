@@ -9,8 +9,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fosrl/cli/internal/olm"
-	versionpkg "github.com/fosrl/cli/internal/version"
+	"github.com/CausQ-Networks/praxis-cli/internal/branding"
+	"github.com/CausQ-Networks/praxis-cli/internal/olm"
+	versionpkg "github.com/CausQ-Networks/praxis-cli/internal/version"
 	newtLogger "github.com/fosrl/newt/logger"
 	olmpkg "github.com/fosrl/olm/olm"
 	"golang.org/x/sys/windows/svc"
@@ -40,14 +41,14 @@ func (h *olmHostedService) Execute(_ []string, r <-chan svc.ChangeRequest, chang
 	}
 
 	creds := ClientCreds{
-		ID:       os.Getenv("PANGOLIN_CLIENT_ID"),
-		Secret:   os.Getenv("PANGOLIN_CLIENT_SECRET"),
-		Endpoint: os.Getenv("PRAXIS_ENDPOINT"),
-		OrgID:    os.Getenv("PANGOLIN_ORG"),
+		ID:       branding.FirstEnv("PRAXIS_CLIENT_ID", "PANGOLIN_CLIENT_ID"),
+		Secret:   branding.FirstEnv("PRAXIS_CLIENT_SECRET", "PANGOLIN_CLIENT_SECRET"),
+		Endpoint: branding.FirstEnv(branding.EndpointEnv, branding.LegacyEndpointEnv),
+		OrgID:    branding.FirstEnv("PRAXIS_ORG", "PANGOLIN_ORG"),
 	}
 	if creds.ID == "" || creds.Secret == "" || creds.Endpoint == "" {
 		if elogErr == nil {
-			elog.Error(1, "Missing PANGOLIN_CLIENT_ID/PANGOLIN_CLIENT_SECRET/PRAXIS_ENDPOINT in the service environment")
+			elog.Error(1, "Missing PRAXIS_CLIENT_ID/PRAXIS_CLIENT_SECRET/PRAXIS_ENDPOINT in the service environment")
 		}
 		changes <- svc.Status{State: svc.StopPending}
 		return false, 1

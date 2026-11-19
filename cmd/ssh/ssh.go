@@ -5,11 +5,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/fosrl/cli/internal/api"
-	"github.com/fosrl/cli/internal/config"
-	"github.com/fosrl/cli/internal/logger"
-	"github.com/fosrl/cli/internal/olm"
-	"github.com/fosrl/cli/internal/utils"
+	"github.com/CausQ-Networks/praxis-cli/internal/api"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/olm"
+	"github.com/CausQ-Networks/praxis-cli/internal/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -38,7 +38,7 @@ func SSHCmd() *cobra.Command {
 
 By default the system OpenSSH client is used on every platform. You can pass the same options as ssh(1) after the resource name (for example port forwards: -L, -R, -D, and -N), then an optional remote command. Example: praxis ssh <resource> -L 8080:127.0.0.1:80 -N
 
-Set PANGOLIN_SSH_BINARY to the full path of ssh(1) to override PATH lookup on all platforms.`,
+Set PRAXIS_SSH_BINARY to the full path of ssh(1) to override PATH lookup on all platforms.`,
 		PreRunE: func(c *cobra.Command, args []string) error {
 			if len(args) < 1 || args[0] == "" {
 				return errResourceIDRequired

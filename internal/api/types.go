@@ -3,7 +3,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/fosrl/cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
 	"strconv"
 	"time"
 )

@@ -7,7 +7,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/fosrl/cli/internal/svcmgr"
+	"github.com/CausQ-Networks/praxis-cli/internal/svcmgr"
 )
 
 // reexec restarts the site tunnel. Windows has no execve, so we start a

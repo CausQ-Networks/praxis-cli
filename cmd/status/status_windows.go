@@ -3,7 +3,7 @@
 package status
 
 import (
-	"github.com/fosrl/cli/cmd/status/client"
+	"github.com/CausQ-Networks/praxis-cli/cmd/status/client"
 	"github.com/spf13/cobra"
 )
 

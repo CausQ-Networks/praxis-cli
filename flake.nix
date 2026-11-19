@@ -29,12 +29,12 @@
           ldflags = [
             "-s"
             "-w"
-            "-X github.com/fosrl/cli/internal/version.Version=${finalAttrs.version}"
+            "-X github.com/CausQ-Networks/praxis-cli/internal/version.Version=${finalAttrs.version}"
           ];
 
           meta = with pkgs.lib; {
             description = "A VPN client for pangolin";
-            homepage = "https://github.com/fosrl/cli";
+            homepage = "https://github.com/CausQ-Networks/praxis-cli";
             license = licenses.unfree;
             maintainers = [];
             mainProgram = "praxis-cli";

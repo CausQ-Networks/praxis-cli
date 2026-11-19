@@ -10,7 +10,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/fosrl/cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
 	authdaemonpkg "github.com/fosrl/newt/authdaemon"
 	"github.com/spf13/cobra"
 )

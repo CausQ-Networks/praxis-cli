@@ -3,7 +3,7 @@
 package logs
 
 import (
-	"github.com/fosrl/cli/cmd/logs/client"
+	"github.com/CausQ-Networks/praxis-cli/cmd/logs/client"
 	"github.com/spf13/cobra"
 )
 

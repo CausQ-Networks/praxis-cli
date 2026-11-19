@@ -9,8 +9,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/fosrl/cli/internal/api"
-	"github.com/fosrl/cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/api"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
 	"github.com/fosrl/newt/logger"
 	"github.com/spf13/cobra"
 )

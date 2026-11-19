@@ -4,12 +4,12 @@ import (
 	"errors"
 	"os"
 
-	sshcmd "github.com/fosrl/cli/cmd/ssh"
-	"github.com/fosrl/cli/internal/api"
-	"github.com/fosrl/cli/internal/config"
-	"github.com/fosrl/cli/internal/logger"
-	"github.com/fosrl/cli/internal/olm"
-	"github.com/fosrl/cli/internal/utils"
+	sshcmd "github.com/CausQ-Networks/praxis-cli/cmd/ssh"
+	"github.com/CausQ-Networks/praxis-cli/internal/api"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/olm"
+	"github.com/CausQ-Networks/praxis-cli/internal/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -42,7 +42,7 @@ Examples:
   praxis scp my-server.internal:/var/log/syslog ./syslog
   praxis scp -r ./dir my-server.internal:~/
 
-Set PANGOLIN_SCP_BINARY to the full path of scp(1) to override PATH lookup on all platforms.`,
+Set PRAXIS_SCP_BINARY to the full path of scp(1) to override PATH lookup on all platforms.`,
 		PreRunE: func(c *cobra.Command, args []string) error {
 			// Use os.Args directly so that unknown boolean scp flags (e.g. -r,
 			// -p, -v) do not cause pflag to swallow the following operand as a

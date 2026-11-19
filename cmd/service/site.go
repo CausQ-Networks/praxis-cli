@@ -5,8 +5,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/fosrl/cli/internal/logger"
-	"github.com/fosrl/cli/internal/svcmgr"
+	"github.com/CausQ-Networks/praxis-cli/internal/branding"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/svcmgr"
 	"github.com/spf13/cobra"
 )
 
@@ -61,14 +62,16 @@ any that are set override the file's values.`,
 		Run: func(cmd *cobra.Command, args []string) {
 			envVars := map[string]string{}
 			for k, v := range map[string]string{
-				"NEWT_ID":           opts.ID,
-				"NEWT_SECRET":       opts.Secret,
-				"PRAXIS_ENDPOINT": opts.Endpoint,
-				"CONFIG_FILE":       opts.ConfigFile,
+				"NEWT_ID":     opts.ID,
+				"NEWT_SECRET": opts.Secret,
+				"CONFIG_FILE": opts.ConfigFile,
 			} {
 				if v != "" {
 					envVars[k] = v
 				}
+			}
+			for k, v := range branding.EndpointEnvVars(opts.Endpoint) {
+				envVars[k] = v
 			}
 			if opts.DisableClients {
 				envVars["DISABLE_CLIENTS"] = "true"

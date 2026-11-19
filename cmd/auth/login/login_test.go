@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/fosrl/cli/internal/api"
+	"github.com/CausQ-Networks/praxis-cli/internal/api"
 )
 
 func TestLoginCmdRegistersOrgIDFlag(t *testing.T) {

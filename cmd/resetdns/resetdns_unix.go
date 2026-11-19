@@ -6,8 +6,8 @@ import (
 	"errors"
 	"os"
 
-	"github.com/fosrl/cli/internal/logger"
-	"github.com/fosrl/cli/internal/olm"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/olm"
 	dnsOverride "github.com/fosrl/olm/dns/override"
 	"github.com/spf13/cobra"
 )

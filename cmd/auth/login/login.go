@@ -10,11 +10,12 @@ import (
 	"time"
 
 	"github.com/charmbracelet/huh"
-	"github.com/fosrl/cli/internal/api"
-	"github.com/fosrl/cli/internal/companion"
-	"github.com/fosrl/cli/internal/config"
-	"github.com/fosrl/cli/internal/logger"
-	"github.com/fosrl/cli/internal/utils"
+	"github.com/CausQ-Networks/praxis-cli/internal/api"
+	"github.com/CausQ-Networks/praxis-cli/internal/branding"
+	"github.com/CausQ-Networks/praxis-cli/internal/companion"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/utils"
 	"github.com/pkg/browser"
 	"github.com/spf13/cobra"
 )
@@ -311,7 +312,7 @@ func loginMain(cmd *cobra.Command, opts *LoginCmdOpts) error {
 				huh.NewSelect[HostingOption]().
 					Title("Select your hosting option").
 					Options(
-						huh.NewOption("Praxis Cloud (app.pangolin.net)", HostingOptionCloud),
+						huh.NewOption("Praxis Cloud ("+branding.CloudHost+")", HostingOptionCloud),
 						huh.NewOption("Self-hosted or Dedicated instance", HostingOptionSelfHosted),
 					).
 					Value(&hostingOption),
@@ -340,7 +341,7 @@ func loginMain(cmd *cobra.Command, opts *LoginCmdOpts) error {
 			}
 		} else {
 			// For cloud, set the default hostname
-			hostname = "app.pangolin.net"
+			hostname = branding.CloudURL
 		}
 	}
 

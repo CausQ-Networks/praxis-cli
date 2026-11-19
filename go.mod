@@ -1,4 +1,4 @@
-module github.com/fosrl/cli
+module github.com/CausQ-Networks/praxis-cli
 
 go 1.26.0
 

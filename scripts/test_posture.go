@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/fosrl/cli/internal/fingerprint"
+	"github.com/CausQ-Networks/praxis-cli/internal/fingerprint"
 )
 
 func main() {

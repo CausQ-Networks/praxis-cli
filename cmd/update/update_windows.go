@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fosrl/cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
 	"github.com/spf13/cobra"
 )
 

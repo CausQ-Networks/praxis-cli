@@ -5,9 +5,9 @@ package companioncmd
 import (
 	"fmt"
 
-	"github.com/fosrl/cli/internal/companion"
-	"github.com/fosrl/cli/internal/config"
-	"github.com/fosrl/cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/companion"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
 	"github.com/spf13/cobra"
 )
 

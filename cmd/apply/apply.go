@@ -1,7 +1,7 @@
 package apply
 
 import (
-	"github.com/fosrl/cli/cmd/apply/blueprint"
+	"github.com/CausQ-Networks/praxis-cli/cmd/apply/blueprint"
 	"github.com/spf13/cobra"
 )
 

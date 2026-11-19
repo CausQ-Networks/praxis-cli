@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"github.com/charmbracelet/huh"
-	"github.com/fosrl/cli/internal/api"
-	"github.com/fosrl/cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/api"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
 )
 
 const launcherResourcesPageSize = 1000

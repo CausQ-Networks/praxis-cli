@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fosrl/cli/cmd"
+	"github.com/CausQ-Networks/praxis-cli/cmd"
 	"github.com/spf13/cobra"
 	"github.com/spf13/cobra/doc"
 )

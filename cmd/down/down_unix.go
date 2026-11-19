@@ -3,7 +3,7 @@
 package down
 
 import (
-	"github.com/fosrl/cli/cmd/down/client"
+	"github.com/CausQ-Networks/praxis-cli/cmd/down/client"
 	"github.com/spf13/cobra"
 )
 

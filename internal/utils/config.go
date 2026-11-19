@@ -2,9 +2,11 @@ package utils
 
 import (
 	"strings"
+
+	"github.com/CausQ-Networks/praxis-cli/internal/branding"
 )
 
-const defaultHostname = "app.pangolin.net"
+const defaultHostname = branding.CloudHost
 
 // FormatHostnameBaseURL returns the hostname formatted as a base URL (with protocol, without /api/v1).
 // This is useful for constructing URLs to the web interface.

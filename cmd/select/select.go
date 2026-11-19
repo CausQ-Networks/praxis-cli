@@ -1,9 +1,9 @@
 package selectcmd
 
 import (
-	"github.com/fosrl/cli/cmd/select/account"
-	"github.com/fosrl/cli/cmd/select/exitnode"
-	"github.com/fosrl/cli/cmd/select/org"
+	"github.com/CausQ-Networks/praxis-cli/cmd/select/account"
+	"github.com/CausQ-Networks/praxis-cli/cmd/select/exitnode"
+	"github.com/CausQ-Networks/praxis-cli/cmd/select/org"
 	"github.com/spf13/cobra"
 )
 

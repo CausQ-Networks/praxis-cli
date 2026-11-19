@@ -3,8 +3,8 @@ package notice
 import (
 	"runtime"
 
-	"github.com/fosrl/cli/internal/companion"
-	"github.com/fosrl/cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/companion"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
 )
 
 const (

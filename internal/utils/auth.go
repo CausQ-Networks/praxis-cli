@@ -6,9 +6,9 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/fosrl/cli/internal/api"
-	"github.com/fosrl/cli/internal/config"
-	"github.com/fosrl/cli/internal/fingerprint"
+	"github.com/CausQ-Networks/praxis-cli/internal/api"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/fingerprint"
 )
 
 // ErrSudoRequired is returned when the user needs to run the command as sudo for first-time setup

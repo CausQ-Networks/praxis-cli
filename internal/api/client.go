@@ -13,8 +13,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fosrl/cli/internal/config"
-	"github.com/fosrl/cli/internal/version"
+	"github.com/CausQ-Networks/praxis-cli/internal/branding"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/version"
 	yaml "go.yaml.in/yaml/v3"
 )
 
@@ -32,7 +33,7 @@ type ClientConfig struct {
 func NewClient(config ClientConfig) (*Client, error) {
 	baseURL := config.BaseURL
 	if baseURL == "" {
-		baseURL = "https://app.pangolin.net"
+		baseURL = branding.CloudURL
 	} else if !strings.HasPrefix(baseURL, "http") {
 		baseURL = "https://" + baseURL
 	}
@@ -640,7 +641,7 @@ func (c *Client) CheckHealth() (bool, error) {
 // normalizeBaseURL normalizes a base URL by adding protocol if missing and trimming trailing slashes
 func normalizeBaseURL(baseURL string) string {
 	if baseURL == "" {
-		baseURL = "https://app.pangolin.net"
+		baseURL = branding.CloudURL
 	}
 	if !strings.HasPrefix(baseURL, "http") {
 		baseURL = "https://" + baseURL

@@ -1,6 +1,6 @@
 package scp
 
-import sshcmd "github.com/fosrl/cli/cmd/ssh"
+import sshcmd "github.com/CausQ-Networks/praxis-cli/cmd/ssh"
 
 type RunOpts struct {
 	User          string

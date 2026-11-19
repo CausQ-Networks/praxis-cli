@@ -1,9 +1,9 @@
 package auth
 
 import (
-	"github.com/fosrl/cli/cmd/auth/login"
-	"github.com/fosrl/cli/cmd/auth/logout"
-	"github.com/fosrl/cli/cmd/auth/status"
+	"github.com/CausQ-Networks/praxis-cli/cmd/auth/login"
+	"github.com/CausQ-Networks/praxis-cli/cmd/auth/logout"
+	"github.com/CausQ-Networks/praxis-cli/cmd/auth/status"
 	"github.com/spf13/cobra"
 )
 

@@ -3,8 +3,8 @@ package version
 import (
 	"fmt"
 
-	"github.com/fosrl/cli/internal/logger"
-	versionpkg "github.com/fosrl/cli/internal/version"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
+	versionpkg "github.com/CausQ-Networks/praxis-cli/internal/version"
 	"github.com/spf13/cobra"
 )
 

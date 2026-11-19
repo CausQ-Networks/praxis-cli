@@ -1,8 +1,8 @@
 package utils
 
 import (
-	"github.com/fosrl/cli/internal/config"
-	"github.com/fosrl/cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/config"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
 )
 
 // RefreshClientSettings fetches the settings the org manages for the active

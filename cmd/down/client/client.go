@@ -4,9 +4,9 @@ import (
 	"errors"
 	"os"
 
-	"github.com/fosrl/cli/internal/logger"
-	"github.com/fosrl/cli/internal/olm"
-	"github.com/fosrl/cli/internal/tui"
+	"github.com/CausQ-Networks/praxis-cli/internal/logger"
+	"github.com/CausQ-Networks/praxis-cli/internal/olm"
+	"github.com/CausQ-Networks/praxis-cli/internal/tui"
 	"github.com/spf13/cobra"
 )
 
