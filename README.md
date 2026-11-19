@@ -1,5 +1,7 @@
 # Praxis CLI
 
+[![Discord](https://img.shields.io/discord/1572896060949659679?logo=discord&style=flat-square&label=Discord)](https://praxis.causq.com/discord/)
+
 Official CLI and client for [Praxis](https://praxis.causq.com) by CausQ Networks.
 
 ## Module
