@@ -15,7 +15,7 @@ const (
 	GitHubRepo = "CausQ-Networks/praxis-cli"
 
 	// CloudHost is the default Praxis Cloud control-plane hostname (no scheme).
-	CloudHost = "app.praxis.causq.com"
+	CloudHost = "app-praxis.causq.com"
 
 	// CloudURL is the default Praxis Cloud base URL (dashboard / API root).
 	CloudURL = "https://" + CloudHost
