@@ -17,7 +17,7 @@ trap cleanup EXIT
 sed -i "s|vendorHash = \"$current_hash\";|vendorHash = pkgs.lib.fakeHash;|" "$FLAKE"
 
 output="$("$RUNTIME" run --rm -e NIXPKGS_ALLOW_UNFREE=1 -v "$REPO_ROOT":/src -w /src nixos/nix \
-  sh -c "git config --global --add safe.directory /src && nix --extra-experimental-features 'nix-command flakes' build --impure .#pangolin-cli 2>&1" || true)"
+  sh -c "git config --global --add safe.directory /src && nix --extra-experimental-features 'nix-command flakes' build --impure .#praxis-cli 2>&1" || true)"
 
 new_hash="$(echo "$output" | grep -oP '(?<=got:\s{4})sha256-\S+' || true)"
 

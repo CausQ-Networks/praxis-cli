@@ -79,7 +79,7 @@ func loginWithWeb(hostname string, sessionCookieName string, knownEmail string) 
 	// Create a temporary API client for login (without auth)
 	loginClient, err := api.NewClient(api.ClientConfig{
 		BaseURL:           baseURL,
-		AgentName:         "pangolin-cli",
+		AgentName:         "praxis-cli",
 		SessionCookieName: sessionCookieName,
 		CSRFToken:         "x-csrf-protection",
 	})
@@ -92,7 +92,7 @@ func loginWithWeb(hostname string, sessionCookieName string, knownEmail string) 
 
 	// Request device code
 	startReq := api.DeviceWebAuthStartRequest{
-		ApplicationName: "Pangolin CLI",
+		ApplicationName: "Praxis CLI",
 		DeviceName:      deviceName,
 	}
 
@@ -193,7 +193,7 @@ func LoginCmd() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "login [hostname]",
-		Short: "Login to Pangolin",
+		Short: "Login to Praxis",
 		Long:  "Interactive login to select your hosting option and configure access.",
 		Args: func(cmd *cobra.Command, args []string) error {
 			if err := cobra.MaximumNArgs(1)(cmd, args); err != nil {
@@ -311,7 +311,7 @@ func loginMain(cmd *cobra.Command, opts *LoginCmdOpts) error {
 				huh.NewSelect[HostingOption]().
 					Title("Select your hosting option").
 					Options(
-						huh.NewOption("Pangolin Cloud (app.pangolin.net)", HostingOptionCloud),
+						huh.NewOption("Praxis Cloud (app.pangolin.net)", HostingOptionCloud),
 						huh.NewOption("Self-hosted or Dedicated instance", HostingOptionSelfHosted),
 					).
 					Value(&hostingOption),

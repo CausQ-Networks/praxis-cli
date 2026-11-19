@@ -14,7 +14,7 @@ const (
 	// UpdateCheckInterval is how often we check for updates
 	UpdateCheckInterval = 12 * time.Hour
 	// UpdateCheckCacheFile is the name of the cache file
-	UpdateCheckCacheFile = "pangolin-update-check.json"
+	UpdateCheckCacheFile = "praxis-update-check.json"
 )
 
 // UpdateCheckCache stores the last update check information
@@ -26,9 +26,9 @@ type UpdateCheckCache struct {
 
 // getCacheFilePath returns the path to the update check cache file
 func getCacheFilePath() (string, error) {
-	pangolinDir, err := config.GetPangolinConfigDir()
+	pangolinDir, err := config.GetPraxisConfigDir()
 	if err != nil {
-		return "", fmt.Errorf("failed to get pangolin config directory: %w", err)
+		return "", fmt.Errorf("failed to get praxis config directory: %w", err)
 	}
 	return filepath.Join(pangolinDir, UpdateCheckCacheFile), nil
 }

@@ -13,8 +13,8 @@ import (
 )
 
 const (
-	// VersionsAPIURL is the Fossorial versions endpoint.
-	VersionsAPIURL = "https://api.fossorial.io/api/v1/versions"
+	// VersionsAPIURL is the GitHub latest-release endpoint for Praxis CLI.
+	VersionsAPIURL = "https://api.github.com/repos/CausQ-Networks/praxis-cli/releases/latest"
 )
 
 // GitHubRelease represents a GitHub release
@@ -24,17 +24,7 @@ type GitHubRelease struct {
 	URL     string `json:"html_url"`
 }
 
-type versionsAPIResponse struct {
-	Data struct {
-		CLI struct {
-			LatestVersion string `json:"latestVersion"`
-			ReleaseNotes  string `json:"releaseNotes"`
-		} `json:"cli"`
-	} `json:"data"`
-	Success bool `json:"success"`
-}
-
-// GetLatestRelease fetches the latest CLI release from the Fossorial versions API.
+// GetLatestRelease fetches the latest CLI release from GitHub.
 func GetLatestRelease() (*GitHubRelease, error) {
 	logger.Debug("Checking latest CLI version from %s", VersionsAPIURL)
 
@@ -47,8 +37,8 @@ func GetLatestRelease() (*GitHubRelease, error) {
 		return nil, fmt.Errorf("failed to create request: %w", err)
 	}
 
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("User-Agent", "pangolin-cli")
+	req.Header.Set("Accept", "application/vnd.github+json")
+	req.Header.Set("User-Agent", "praxis-cli")
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -66,26 +56,16 @@ func GetLatestRelease() (*GitHubRelease, error) {
 		return nil, fmt.Errorf("failed to read response: %w", err)
 	}
 
-	var apiResp versionsAPIResponse
-	if err := json.Unmarshal(body, &apiResp); err != nil {
+	var release GitHubRelease
+	if err := json.Unmarshal(body, &release); err != nil {
 		return nil, fmt.Errorf("failed to parse response: %w", err)
 	}
 
-	if !apiResp.Success {
-		return nil, fmt.Errorf("versions API returned unsuccessful response")
+	if release.TagName == "" {
+		return nil, fmt.Errorf("GitHub release response missing tag_name")
 	}
 
-	if apiResp.Data.CLI.LatestVersion == "" {
-		return nil, fmt.Errorf("versions API response missing cli.latestVersion")
-	}
-
-	release := GitHubRelease{
-		TagName: apiResp.Data.CLI.LatestVersion,
-		Name:    apiResp.Data.CLI.LatestVersion,
-		URL:     apiResp.Data.CLI.ReleaseNotes,
-	}
-
-	logger.Debug("Versions API latest cli version: %s", release.TagName)
+	logger.Debug("GitHub latest cli version: %s", release.TagName)
 
 	return &release, nil
 }

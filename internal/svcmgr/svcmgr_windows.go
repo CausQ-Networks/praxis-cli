@@ -31,20 +31,20 @@ var ErrElevationRequired = errors.New("this command must be run from an elevated
 // including at boot, unlike arguments passed via the SCM's separate
 // StartService parameters.
 //
-// hostMarker supervises a plain `pangolin up ...` child process (used for
+// hostMarker supervises a plain `praxis up ...` child process (used for
 // the site service, whose "up site" is fully supported as a standalone
 // Windows console command already). olmHostMarker is used only for the
-// client service: `pangolin up client` has no standalone Windows console
+// client service: `praxis up client` has no standalone Windows console
 // mode (see runOlmClient below for why), so that service instead runs the
 // olm tunnel directly in-process, the same way olm's own Windows service
 // (github.com/fosrl/olm's service_windows.go) does.
 const (
-	hostMarker    = "__pangolin-service-host"
-	olmHostMarker = "__pangolin-service-host-olm"
+	hostMarker    = "__praxis-service-host"
+	olmHostMarker = "__praxis-service-host-olm"
 )
 
 func logDir() string {
-	return filepath.Join(os.Getenv("PROGRAMDATA"), "pangolin", "logs")
+	return filepath.Join(os.Getenv("PROGRAMDATA"), "praxis", "logs")
 }
 
 func logPath(name string) string {
@@ -60,7 +60,7 @@ func CheckSupported() error {
 }
 
 // Install registers a Windows Service that, on start, re-launches this
-// same pangolin executable to host the service - see MaybeRunHostedService.
+// same praxis executable to host the service - see MaybeRunHostedService.
 // For most services that means supervising `spec.Args` (e.g. "up site") as
 // a child process; the client service is a special case that instead runs
 // the olm tunnel directly in-process (see olmclient_windows.go). Either
@@ -85,7 +85,7 @@ func Install(spec Spec) error {
 
 	if s, err := m.OpenService(spec.Name); err == nil {
 		s.Close()
-		return fmt.Errorf("service %s already exists; run 'pangolin service uninstall' first to reinstall it", spec.Name)
+		return fmt.Errorf("service %s already exists; run 'praxis service uninstall' first to reinstall it", spec.Name)
 	}
 
 	config := mgr.Config{
@@ -296,7 +296,7 @@ func MaybeRunHostedService() bool {
 
 	switch os.Args[1] {
 	case hostMarker:
-		// Supervises a plain child process running `pangolin up site` -
+		// Supervises a plain child process running `praxis up site` -
 		// exactly the same command Linux/macOS run under systemd/launchd.
 		// This keeps site exercising the same well-tested CLI code path on
 		// every platform.
@@ -376,7 +376,7 @@ func (h *hostedService) Execute(_ []string, r <-chan svc.ChangeRequest, changes 
 // for thousands of goroutines.
 const crashExitTimeout = 30 * time.Second
 
-// supervise runs the actual `pangolin up ...` child process, restarting it
+// supervise runs the actual `praxis up ...` child process, restarting it
 // (after a short backoff) if it exits unexpectedly, until stopCh is closed.
 // This is the Windows equivalent of systemd's Restart=always / launchd's
 // KeepAlive. warn, if non-nil, reports to the Windows Event Log.

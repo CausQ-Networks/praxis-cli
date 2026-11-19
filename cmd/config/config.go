@@ -129,7 +129,7 @@ func settingsModeMessage(cfg *config.Config, orgID string, settings *config.Clie
 		mode = "has its own config"
 	}
 	if settings != nil {
-		return fmt.Sprintf("Organization %s %s; some settings are managed by its server (see `pangolin config effective`)", orgID, mode)
+		return fmt.Sprintf("Organization %s %s; some settings are managed by its server (see `praxis config effective`)", orgID, mode)
 	}
 	return fmt.Sprintf("Organization %s %s", orgID, mode)
 }
@@ -197,10 +197,10 @@ Per-organization only:
   up.exit_node_resource_id
 
 Examples:
-  pangolin config set up.tunnel_dns true
-  pangolin config set up.upstream_dns 10.0.0.53
-  pangolin config set up.upstream_dns 10.0.0.53,10.0.0.54
-  pangolin config set up.mtu 1400 --org my-org
+  praxis config set up.tunnel_dns true
+  praxis config set up.upstream_dns 10.0.0.53
+  praxis config set up.upstream_dns 10.0.0.53,10.0.0.54
+  praxis config set up.mtu 1400 --org my-org
 `,
 		Args: cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {

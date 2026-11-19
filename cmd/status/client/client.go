@@ -98,7 +98,7 @@ func printStatusTable(status *olm.StatusResponse) {
 		if status.ExitNode != nil {
 			lastSeen := formatLastSeen(status.ExitNode.LastSeen.Format(time.RFC3339))
 			peerRows = append(peerRows, []string{
-				"Pangolin Server",
+				"Praxis Server",
 				status.ExitNode.Endpoint,
 				formatStatus(status.ExitNode.Connected, true),
 				lastSeen,

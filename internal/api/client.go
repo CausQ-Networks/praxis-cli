@@ -666,9 +666,9 @@ func buildAPIBaseURL(baseURL string) string {
 	return baseURL
 }
 
-// getUserAgent returns the user agent string formatted as "pangolin-cli-version"
+// getUserAgent returns the user agent string formatted as "praxis-cli-version"
 func getUserAgent(agentName string) string {
-	return fmt.Sprintf("pangolin-cli-%s", version.Version)
+	return fmt.Sprintf("praxis-cli-%s", version.Version)
 }
 
 // setJSONRequestHeaders sets common headers for JSON API requests

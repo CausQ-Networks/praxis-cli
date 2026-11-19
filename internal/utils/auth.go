@@ -12,7 +12,7 @@ import (
 )
 
 // ErrSudoRequired is returned when the user needs to run the command as sudo for first-time setup
-var ErrSudoRequired = errors.New("Please rerun this command as sudo. This is a one time thing for Pangolin to setup your machine.")
+var ErrSudoRequired = errors.New("Please rerun this command as sudo. This is a one time thing for Praxis to setup your machine.")
 
 // EnsureOlmCredentials ensures that OLM credentials exist and are valid.
 // It checks if OLM credentials exist locally, verifies them on the server,

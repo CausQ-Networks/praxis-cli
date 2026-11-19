@@ -17,7 +17,7 @@ var ErrRootRequired = errors.New("this command must be run as root (use sudo)")
 
 const (
 	unitDir = "/etc/systemd/system"
-	envDir  = "/etc/pangolin"
+	envDir  = "/etc/praxis"
 )
 
 func unitPath(name string) string {

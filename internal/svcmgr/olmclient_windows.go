@@ -19,9 +19,9 @@ import (
 
 // olmHostedService is the Windows Service handler for the client
 // service. Unlike hostedService (used for site), it doesn't spawn a
-// `pangolin up client` child process - that command has no standalone
+// `praxis up client` child process - that command has no standalone
 // Windows console mode, since interactive tunnel management on Windows is
-// the Pangolin desktop app's job, not the CLI's. Instead, mirroring how
+// the Praxis desktop app's job, not the CLI's. Instead, mirroring how
 // olm's own Windows service (github.com/fosrl/olm's service_windows.go)
 // works, it runs the tunnel directly in-process via the vendored olm
 // package.
@@ -36,18 +36,18 @@ func (h *olmHostedService) Execute(_ []string, r <-chan svc.ChangeRequest, chang
 	elog, elogErr := eventlog.Open(h.name)
 	if elogErr == nil {
 		defer elog.Close()
-		elog.Info(1, "Starting Pangolin client tunnel")
+		elog.Info(1, "Starting Praxis client tunnel")
 	}
 
 	creds := ClientCreds{
 		ID:       os.Getenv("PANGOLIN_CLIENT_ID"),
 		Secret:   os.Getenv("PANGOLIN_CLIENT_SECRET"),
-		Endpoint: os.Getenv("PANGOLIN_ENDPOINT"),
+		Endpoint: os.Getenv("PRAXIS_ENDPOINT"),
 		OrgID:    os.Getenv("PANGOLIN_ORG"),
 	}
 	if creds.ID == "" || creds.Secret == "" || creds.Endpoint == "" {
 		if elogErr == nil {
-			elog.Error(1, "Missing PANGOLIN_CLIENT_ID/PANGOLIN_CLIENT_SECRET/PANGOLIN_ENDPOINT in the service environment")
+			elog.Error(1, "Missing PANGOLIN_CLIENT_ID/PANGOLIN_CLIENT_SECRET/PRAXIS_ENDPOINT in the service environment")
 		}
 		changes <- svc.Status{State: svc.StopPending}
 		return false, 1
@@ -73,7 +73,7 @@ func (h *olmHostedService) Execute(_ []string, r <-chan svc.ChangeRequest, chang
 				case <-time.After(15 * time.Second):
 				}
 				if elogErr == nil {
-					elog.Info(1, "Pangolin client tunnel stopped")
+					elog.Info(1, "Praxis client tunnel stopped")
 				}
 				return false, 0
 			}
@@ -85,7 +85,7 @@ func (h *olmHostedService) Execute(_ []string, r <-chan svc.ChangeRequest, chang
 			// systemd's Restart=always / launchd's KeepAlive.
 			cancel()
 			if elogErr == nil {
-				elog.Error(1, fmt.Sprintf("Pangolin client tunnel exited unexpectedly: %v", err))
+				elog.Error(1, fmt.Sprintf("Praxis client tunnel exited unexpectedly: %v", err))
 			}
 			changes <- svc.Status{State: svc.StopPending}
 			return false, 1
@@ -94,9 +94,9 @@ func (h *olmHostedService) Execute(_ []string, r <-chan svc.ChangeRequest, chang
 }
 
 // ClientCreds are the machine-client credentials the olm-hosted Windows
-// service needs. Unlike `pangolin up client`'s full flow (account login,
+// service needs. Unlike `praxis up client`'s full flow (account login,
 // keyring, interactive detach/TUI), this only ever runs in machine-client
-// mode - the same restriction `pangolin service install site` already
+// mode - the same restriction `praxis service install site` already
 // places on the site service (explicit --id/--secret/--endpoint, no
 // account needed).
 type ClientCreds struct {
@@ -137,9 +137,9 @@ func runOlmClient(ctx context.Context, serviceName string, creds ClientCreds) er
 		// `down`, etc. still find the service.
 		SocketPath: olm.ServiceSocketPath,
 		Version:    versionpkg.Version,
-		Agent:      "Pangolin Service",
+		Agent:      "Praxis Service",
 		OlmVersion: versionpkg.OlmVersionOverride,
-		// No WatchdogSubcommand: `pangolin up client` sets one (see
+		// No WatchdogSubcommand: `praxis up client` sets one (see
 		// cmd/watchdog) as a DNS-cleanup safety net for its own process,
 		// but the CLI's watchdog subcommand isn't implemented on Windows
 		// (cmd/watchdog/watchdog_windows.go is a stub), so pointing olm at
@@ -169,7 +169,7 @@ func runOlmClient(ctx context.Context, serviceName string, creds ClientCreds) er
 		Secret:               creds.Secret,
 		OrgID:                creds.OrgID,
 		MTU:                  1280,
-		InterfaceName:        "pangolin",
+		InterfaceName:        "praxis",
 		Holepunch:            true,
 		PingIntervalDuration: 5 * time.Second,
 		PingTimeoutDuration:  5 * time.Second,

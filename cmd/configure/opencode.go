@@ -10,7 +10,7 @@ import (
 )
 
 // promptOpencodeProviders asks which OpenCode provider(s) to point at the
-// Pangolin AI gateway. OpenCode configures baseURL and API keys per provider
+// Praxis AI gateway. OpenCode configures baseURL and API keys per provider
 // (unlike Claude/Codex, which each speak for a single fixed provider), so the
 // user types a comma-separated list rather than picking from a fixed set -
 // this works for any provider id OpenCode recognizes, not just the two most
@@ -56,7 +56,7 @@ func parseProviderList(s string) []string {
 	return providers
 }
 
-// writeOpencodeConfig merges the Pangolin AI gateway baseURL into OpenCode's
+// writeOpencodeConfig merges the Praxis AI gateway baseURL into OpenCode's
 // global config (~/.config/opencode/opencode.json, respecting $XDG_CONFIG_HOME
 // if set) and, when keyed, the credential into its auth store
 // (~/.local/share/opencode/auth.json, respecting $XDG_DATA_HOME if set), for

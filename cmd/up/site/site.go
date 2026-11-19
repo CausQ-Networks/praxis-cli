@@ -1,5 +1,5 @@
-// Package site implements `pangolin up site`, which runs a Newt site
-// tunnel embedded directly in the Pangolin CLI. It accepts exactly the same
+// Package site implements `praxis up site`, which runs a Newt site
+// tunnel embedded directly in the Praxis CLI. It accepts exactly the same
 // command-line flags and environment variables as the standalone newt
 // binary (see github.com/fosrl/newt), reusing newt's own config-loading and
 // runtime packages rather than re-implementing them.
@@ -31,15 +31,15 @@ import (
 // SiteUpCmd returns the `up site` command. Flag parsing is delegated
 // entirely to newtconfig (the same flag set the newt binary itself parses),
 // so this command intentionally does not declare any cobra flags of its
-// own - run `pangolin up site --help` to see them.
+// own - run `praxis up site --help` to see them.
 func SiteUpCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "site",
 		Short: "Start a site connection (Newt)",
-		Long: `Bring up a site tunnel using Newt, embedded directly in the Pangolin CLI.
+		Long: `Bring up a site tunnel using Newt, embedded directly in the Praxis CLI.
 
 This accepts the same flags and environment variables as the standalone
-newt binary. Run 'pangolin up site --help' to see them.`,
+newt binary. Run 'praxis up site --help' to see them.`,
 		DisableFlagParsing: true,
 		SilenceUsage:       true,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -99,25 +99,25 @@ func run(ctx context.Context, args []string) error {
 }
 
 // defaultSiteConfigFile returns the site tunnel's config file path when run
-// under the Pangolin CLI: alongside the CLI's own config.json, in the same
-// ~/.config/pangolin directory, but named site.json so the two don't
+// under the Praxis CLI: alongside the CLI's own config.json, in the same
+// ~/.config/praxis directory, but named site.json so the two don't
 // collide. This only applies as a fallback default - --config-file and
 // CONFIG_FILE still take precedence, and the standalone newt binary keeps
 // using its own default (~/.config/newt-client/config.json) since it never
 // sets newtconfig.Options.DefaultConfigFile.
 func defaultSiteConfigFile() (string, error) {
-	dir, err := config.GetPangolinConfigDir()
+	dir, err := config.GetPraxisConfigDir()
 	if err != nil {
 		return "", err
 	}
 	return filepath.Join(dir, "site.json"), nil
 }
 
-// startSelfUpdateChecks periodically checks the Pangolin server for a newer
+// startSelfUpdateChecks periodically checks the Praxis server for a newer
 // CLI release and, if one is available, downloads it, replaces the running
 // `pangolin` binary on disk, and re-execs in place - mirroring the
 // self-update loop the standalone newt binary runs for itself, but with
-// Agent: "cli" so the server hands back a pangolin-cli release instead of a
+// Agent: "cli" so the server hands back a praxis-cli release instead of a
 // newt one.
 func startSelfUpdateChecks(ctx context.Context, resolvedCfg newtpkg.Config) {
 	// Reuse the same TLS parameters as the websocket client for the

@@ -44,8 +44,8 @@ import (
 // state when doing doc generation.
 func RootCommand(initResources bool) (*cobra.Command, error) {
 	cmd := &cobra.Command{
-		Use:          "pangolin",
-		Short:        "Pangolin CLI",
+		Use:          "praxis",
+		Short:        "Praxis CLI",
 		SilenceUsage: true,
 		CompletionOptions: cobra.CompletionOptions{
 			HiddenDefaultCmd: true,
@@ -118,14 +118,14 @@ func RootCommand(initResources bool) (*cobra.Command, error) {
 
 func commandNeedsAuthInit(cmd *cobra.Command) bool {
 	// `up site` runs Newt standalone, exactly like the newt binary itself -
-	// it takes its own id/secret/endpoint and never needs a Pangolin
+	// it takes its own id/secret/endpoint and never needs a Praxis
 	// account or the companion daemon.
 	if cmd.Name() == "site" && commandHasAncestor(cmd, "up") {
 		return false
 	}
 	// `service` installs/manages systemd units and always takes its own
 	// id/secret/endpoint (site) or id/secret (client) explicitly, so it
-	// never needs a Pangolin account or the companion daemon either.
+	// never needs a Praxis account or the companion daemon either.
 	if cmd.Name() == "service" || commandHasAncestor(cmd, "service") {
 		return false
 	}
@@ -242,7 +242,7 @@ func mainCommandPreRun(cmd *cobra.Command, args []string) error {
 		logger.Debug("Starting update check for %q command", cmdName)
 		versionpkg.CheckForUpdateAsync(func(release *versionpkg.GitHubRelease) {
 			logger.Warning("A new version is available: %s (current: %s)", release.TagName, versionpkg.Version)
-			logger.Info("Run 'pangolin update' to update to the latest version")
+			logger.Info("Run 'praxis update' to update to the latest version")
 			fmt.Println()
 		})
 	} else {
@@ -255,9 +255,9 @@ func mainCommandPreRun(cmd *cobra.Command, args []string) error {
 // Make sure all required directories exist once
 // before executing any subcommands.
 func ensureRuntimeDirs(cfg *config.Config) {
-	configDir, err := config.GetPangolinConfigDir()
+	configDir, err := config.GetPraxisConfigDir()
 	if err != nil {
-		logger.Warning("failed to create pangolin configuration directory: %v", err)
+		logger.Warning("failed to create praxis configuration directory: %v", err)
 	} else {
 		err = os.MkdirAll(configDir, 0o755)
 		if err != nil {

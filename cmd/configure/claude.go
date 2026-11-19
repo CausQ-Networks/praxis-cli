@@ -6,7 +6,7 @@ import (
 	"runtime"
 )
 
-// writeClaudeConfig merges the Pangolin AI gateway settings into
+// writeClaudeConfig merges the Praxis AI gateway settings into
 // ~/.claude/settings.json, preserving any other existing keys.
 func writeClaudeConfig(endpoint string, auth Auth) ([]string, error) {
 	home, err := homeDir()

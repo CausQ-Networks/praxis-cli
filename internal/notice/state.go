@@ -17,7 +17,7 @@ type state struct {
 }
 
 func noticesFilePath() (string, error) {
-	dir, err := config.GetPangolinConfigDir()
+	dir, err := config.GetPraxisConfigDir()
 	if err != nil {
 		return "", err
 	}
@@ -49,7 +49,7 @@ func loadState() (*state, error) {
 }
 
 func saveState(s *state) error {
-	dir, err := config.GetPangolinConfigDir()
+	dir, err := config.GetPraxisConfigDir()
 	if err != nil {
 		return err
 	}

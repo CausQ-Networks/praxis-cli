@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-// Default session cookie and CSRF values match the Pangolin web/API expectations.
+// Default session cookie and CSRF values match the Praxis web/API expectations.
 const (
 	defaultSessionCookieName = "p_session_token"
 	defaultCSRFToken         = "x-csrf-protection"

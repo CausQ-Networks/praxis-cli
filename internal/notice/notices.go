@@ -13,7 +13,7 @@ const (
 	desktopClientLinuxID      = "desktop-client-available-linux-v1"
 )
 
-const downloadsURL = "https://pangolin.net/downloads"
+const downloadsURL = "https://praxis.causq.com"
 
 var registeredNotices = []Notice{
 	{
@@ -47,7 +47,7 @@ var registeredNotices = []Notice{
 
 func desktopClientLinuxLines(cfg *config.Config) []string {
 	return []string{
-		"A Pangolin desktop client is now available for Linux.",
+		"A Praxis desktop client is now available for Linux.",
 		"It adds a tray icon for connecting, and the CLI can use its login.",
 		"Download it at " + downloadsURL,
 	}
@@ -57,15 +57,15 @@ func companionModeIntroLines(cfg *config.Config) []string {
 	clientName := companion.PlatformProviderName()
 
 	lines := []string{
-		"Pangolin CLI now uses companion mode with " + clientName + ".",
+		"Praxis CLI now uses companion mode with " + clientName + ".",
 		"Login, logout, and account, organization, or exit node changes are managed in " + clientName + ".",
 	}
 	if companion.RequiredDesktopAppVersion() != "" {
 		lines = append(lines, "Requires "+clientName+" version "+companion.RequiredDesktopAppVersion()+" or later.")
 	}
-	lines = append(lines, "Run 'pangolin companion status' for details.")
+	lines = append(lines, "Run 'praxis companion status' for details.")
 	if cfg.CompanionModeEnabled() {
-		lines = append(lines, "To use standalone CLI authentication, run 'pangolin companion disable'.")
+		lines = append(lines, "To use standalone CLI authentication, run 'praxis companion disable'.")
 	}
 	return lines
 }

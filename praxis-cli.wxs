@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  MSI installer for the Pangolin CLI (WiX v4+ schema).
+  MSI installer for the Praxis CLI (WiX v4+ schema).
   Build with scripts\build-msi.bat, or directly:
-    wix build -arch x64 -d Version=X.Y.Z -d BuildDir=bin -o bin/pangolin-cli_windows_installer.msi pangolin-cli.wxs
+    wix build -arch x64 -d Version=X.Y.Z -d BuildDir=bin -o bin/praxis-cli_windows_installer.msi praxis-cli.wxs
   Version must be numeric (X.Y.Z); drop any -rc.N suffix.
-  Requires bin/pangolin-cli_windows_amd64.exe and third_party/wintun/amd64/wintun.dll.
+  Requires bin/praxis-cli_windows_amd64.exe and third_party/wintun/amd64/wintun.dll.
 -->
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-  <Package Name="Pangolin CLI"
+  <Package Name="Praxis CLI"
            Language="1033"
            Version="$(var.Version)"
            Manufacturer="Fossorial"
@@ -18,13 +18,13 @@
     <MediaTemplate EmbedCab="yes" />
 
     <StandardDirectory Id="ProgramFiles64Folder">
-      <Directory Id="INSTALLFOLDER" Name="pangolin-cli">
-        <Component Id="PangolinCli" Guid="C1D2E3F4-A5B6-4789-9012-3456789ABCDE">
-          <File Id="PangolinCliExe"
-                Source="$(var.BuildDir)/pangolin-cli_windows_amd64.exe"
+      <Directory Id="INSTALLFOLDER" Name="praxis-cli">
+        <Component Id="PraxisCli" Guid="C1D2E3F4-A5B6-4789-9012-3456789ABCDE">
+          <File Id="PraxisCliExe"
+                Source="$(var.BuildDir)/praxis-cli_windows_amd64.exe"
                 Name="pangolin.exe"
                 KeyPath="yes" />
-          <Environment Id="PangolinCliPath"
+          <Environment Id="PraxisCliPath"
                        Name="PATH"
                        Value="[INSTALLFOLDER]"
                        Part="last"
@@ -41,16 +41,16 @@
     </StandardDirectory>
 
     <StandardDirectory Id="ProgramMenuFolder">
-      <Directory Id="ApplicationProgramsFolder" Name="pangolin-cli">
+      <Directory Id="ApplicationProgramsFolder" Name="praxis-cli">
         <Component Id="StartMenuShortcut" Guid="D2E3F4A5-B6C7-4890-0123-456789ABCDEF">
           <Shortcut Id="StartMenuShortcut"
-                    Name="pangolin-cli"
-                    Description="Pangolin CLI"
+                    Name="praxis-cli"
+                    Description="Praxis CLI"
                     Target="[INSTALLFOLDER]pangolin.exe"
                     Icon="ProductIcon" />
           <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
           <RegistryValue Root="HKCU"
-                         Key="Software\Fossorial\PangolinCLI"
+                         Key="Software\Fossorial\PraxisCLI"
                          Name="StartMenuShortcut"
                          Type="integer"
                          Value="1"
@@ -59,8 +59,8 @@
       </Directory>
     </StandardDirectory>
 
-    <Feature Id="ProductFeature" Title="pangolin-cli" Level="1">
-      <ComponentRef Id="PangolinCli" />
+    <Feature Id="ProductFeature" Title="praxis-cli" Level="1">
+      <ComponentRef Id="PraxisCli" />
       <ComponentRef Id="WintunDll" />
       <ComponentRef Id="StartMenuShortcut" />
     </Feature>

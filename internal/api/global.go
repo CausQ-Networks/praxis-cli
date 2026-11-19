@@ -25,7 +25,7 @@ func InitClient(hostname string, token string, sessionCookieName string) (*Clien
 	// Create API client (this should never fail, but handle it just in case)
 	client, err := NewClient(ClientConfig{
 		BaseURL:           baseURL,
-		AgentName:         "pangolin-cli",
+		AgentName:         "praxis-cli",
 		Token:             token,
 		SessionCookieName: sessionCookieName,
 		CSRFToken:         defaultCSRFToken,

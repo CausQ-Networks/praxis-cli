@@ -152,6 +152,6 @@ func WarnUnmanagedClient(orgID string) {
 	}
 
 	if providerName := companion.PlatformProviderName(); providerName != "" && status.Agent == providerName {
-		logger.Info("Switch accounts or organizations in %s to change its connection, or run 'pangolin companion enable' to have the CLI use %s's account and organization.", providerName, providerName)
+		logger.Info("Switch accounts or organizations in %s to change its connection, or run 'praxis companion enable' to have the CLI use %s's account and organization.", providerName, providerName)
 	}
 }

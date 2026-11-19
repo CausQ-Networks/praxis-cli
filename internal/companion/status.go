@@ -58,7 +58,7 @@ func EvaluateStatus(cfg *config.Config) StatusReport {
 
 func unavailableClientName() string {
 	if runtime.GOOS == "linux" {
-		return "Pangolin Linux client is not installed"
+		return "Praxis Linux client is not installed"
 	}
 	return "not supported on this platform"
 }

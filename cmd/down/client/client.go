@@ -44,7 +44,7 @@ func clientDownMain(cmd *cobra.Command) error {
 	}
 
 	if status.Agent != olm.AgentName {
-		logger.Error("Client was not started by Pangolin CLI (version: %s)", status.Version)
+		logger.Error("Client was not started by Praxis CLI (version: %s)", status.Version)
 		logger.Info("Only clients started by this CLI can be stopped using this command")
 		return err
 	}

@@ -15,7 +15,7 @@ import (
 
 var (
 	errHostnameRequired   = errors.New("API did not return a hostname for the connection")
-	errResourceIDRequired = errors.New("Resource (alias or identifier) is required; example: pangolin ssh my-server.internal or pangolin ssh user@my-server.internal")
+	errResourceIDRequired = errors.New("Resource (alias or identifier) is required; example: praxis ssh my-server.internal or praxis ssh user@my-server.internal")
 	errNoClientRunning    = errors.New("No client is currently running. Start the client first.")
 )
 
@@ -36,7 +36,7 @@ func SSHCmd() *cobra.Command {
 		},
 		Long: `Run an SSH client in the terminal. Generates a key pair and signs it just-in-time, then connects to the target resource.
 
-By default the system OpenSSH client is used on every platform. You can pass the same options as ssh(1) after the resource name (for example port forwards: -L, -R, -D, and -N), then an optional remote command. Example: pangolin ssh <resource> -L 8080:127.0.0.1:80 -N
+By default the system OpenSSH client is used on every platform. You can pass the same options as ssh(1) after the resource name (for example port forwards: -L, -R, -D, and -N), then an optional remote command. Example: praxis ssh <resource> -L 8080:127.0.0.1:80 -N
 
 Set PANGOLIN_SSH_BINARY to the full path of ssh(1) to override PATH lookup on all platforms.`,
 		PreRunE: func(c *cobra.Command, args []string) error {

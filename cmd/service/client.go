@@ -35,14 +35,14 @@ immediately.
 
 Intended for machine clients (--id/--secret), which don't have an
 interactively logged-in user to restart them. On Windows this only supports
-the service itself - 'pangolin up client' has no standalone Windows console
-mode (that's handled by the Pangolin desktop app); the service runs the
+the service itself - 'praxis up client' has no standalone Windows console
+mode (that's handled by the Praxis desktop app); the service runs the
 tunnel directly in-process instead.`,
 		Run: func(cmd *cobra.Command, args []string) {
 			envVars := map[string]string{
 				"PANGOLIN_CLIENT_ID":     opts.ID,
 				"PANGOLIN_CLIENT_SECRET": opts.Secret,
-				"PANGOLIN_ENDPOINT":      opts.Endpoint,
+				"PRAXIS_ENDPOINT":      opts.Endpoint,
 			}
 			if opts.OrgID != "" {
 				envVars["PANGOLIN_ORG"] = opts.OrgID
@@ -50,8 +50,8 @@ tunnel directly in-process instead.`,
 
 			spec := svcmgr.Spec{
 				Name:        clientServiceName,
-				DisplayName: "Pangolin Client",
-				Description: "Runs 'pangolin up client' persistently in the background",
+				DisplayName: "Praxis Client",
+				Description: "Runs 'praxis up client' persistently in the background",
 				// On Linux/macOS, Args is the subprocess command line
 				// (--attach runs in the foreground under the service
 				// supervisor's control, no self-detaching subprocess/TUI).
@@ -70,13 +70,13 @@ tunnel directly in-process instead.`,
 			}
 
 			logger.Success("Installed and started the %s service", clientServiceName)
-			logger.Info("Check status with 'pangolin service status client' or follow logs with 'pangolin service logs client -f'")
+			logger.Info("Check status with 'praxis service status client' or follow logs with 'praxis service logs client -f'")
 		},
 	}
 
 	cmd.Flags().StringVar(&opts.ID, "id", "", "Client ID")
 	cmd.Flags().StringVar(&opts.Secret, "secret", "", "Client secret")
-	cmd.Flags().StringVar(&opts.Endpoint, "endpoint", "", "Pangolin server endpoint")
+	cmd.Flags().StringVar(&opts.Endpoint, "endpoint", "", "Praxis server endpoint")
 	cmd.Flags().StringVar(&opts.OrgID, "org", "", "Organization ID")
 	cmd.MarkFlagRequired("id")
 	cmd.MarkFlagRequired("secret")

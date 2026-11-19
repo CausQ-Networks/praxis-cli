@@ -19,13 +19,13 @@ var ErrRootRequired = errors.New("this command must be run as root (use sudo)")
 
 const (
 	launchDaemonDir = "/Library/LaunchDaemons"
-	logDir          = "/var/log/pangolin"
+	logDir          = "/var/log/praxis"
 )
 
 // label returns the reverse-DNS launchd label for a service, e.g.
-// "pangolin-site" -> "net.pangolin.site".
+// "praxis-site" -> "com.causq.praxis.site".
 func label(name string) string {
-	return "net.pangolin." + strings.TrimPrefix(name, "pangolin-")
+	return "com.causq.praxis." + strings.TrimPrefix(name, "pangolin-")
 }
 
 func plistPath(name string) string {

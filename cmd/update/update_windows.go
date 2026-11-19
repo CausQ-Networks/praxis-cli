@@ -18,11 +18,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const windowsInstallerAssetName = "pangolin-cli_windows_installer.msi"
+const windowsInstallerAssetName = "praxis-cli_windows_installer.msi"
 const githubAPIBaseURL = "https://api.github.com"
-const versionsAPIURL = "https://api.fossorial.io/api/v1/versions"
+const versionsAPIURL = "https://api.github.com/repos/CausQ-Networks/praxis-cli/releases/latest"
 
-var windowsUpdateRepo = "fosrl/cli"
+var windowsUpdateRepo = "CausQ-Networks/praxis-cli"
 
 type githubReleaseAsset struct {
 	Name string `json:"name"`
@@ -47,8 +47,8 @@ type versionsAPIResponse struct {
 func UpdateCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "update",
-		Short: "Update Pangolin CLI to the latest version",
-		Long:  "Update Pangolin CLI to the latest version by downloading the new installer from GitHub",
+		Short: "Update Praxis CLI to the latest version",
+		Long:  "Update Praxis CLI to the latest version by downloading the new installer from GitHub",
 		Run: func(cmd *cobra.Command, args []string) {
 			if err := updateMain(windowsUpdateRepo); err != nil {
 				os.Exit(1)
@@ -61,7 +61,7 @@ func UpdateCmd() *cobra.Command {
 }
 
 func updateMain(repo string) error {
-	logger.Info("Checking for latest Pangolin CLI Windows installer...")
+	logger.Info("Checking for latest Praxis CLI Windows installer...")
 
 	release, err := getLatestRelease(repo)
 	if err != nil {
@@ -83,7 +83,7 @@ func updateMain(repo string) error {
 		return err
 	}
 
-	tempDir, err := os.MkdirTemp("", "pangolin-cli-update-*")
+	tempDir, err := os.MkdirTemp("", "praxis-cli-update-*")
 	if err != nil {
 		logger.Error("Failed to create temp dir: %v", err)
 		return err
@@ -143,7 +143,7 @@ func getLatestCLIVersion() (string, error) {
 	}
 
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("User-Agent", "pangolin-cli-update")
+	req.Header.Set("User-Agent", "praxis-cli-update")
 
 	client := &http.Client{Timeout: 15 * time.Second}
 	resp, err := client.Do(req)
@@ -182,7 +182,7 @@ func getReleaseByTag(owner, name, tag string) (*githubReleaseResponse, error) {
 	}
 
 	req.Header.Set("Accept", "application/vnd.github+json")
-	req.Header.Set("User-Agent", "pangolin-cli-update")
+	req.Header.Set("User-Agent", "praxis-cli-update")
 
 	client := &http.Client{Timeout: 15 * time.Second}
 	resp, err := client.Do(req)
@@ -221,7 +221,7 @@ func downloadFile(url string, destPath string) error {
 	}
 
 	req.Header.Set("Accept", "application/octet-stream")
-	req.Header.Set("User-Agent", "pangolin-cli-update")
+	req.Header.Set("User-Agent", "praxis-cli-update")
 
 	client := &http.Client{Timeout: 5 * time.Minute}
 	resp, err := client.Do(req)

@@ -17,7 +17,7 @@ import (
 func LogoutCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "logout",
-		Short: "Logout from Pangolin",
+		Short: "Logout from Praxis",
 		Long:  "Logout and clear your session",
 		Run: func(cmd *cobra.Command, args []string) {
 			if err := logoutMain(cmd); err != nil {
@@ -123,7 +123,7 @@ func logoutMain(cmd *cobra.Command) error {
 	} else if account.Username != nil && *account.Username != "" {
 		displayName = *account.Username
 	}
-	logger.Success("Logged out of Pangolin account %s", displayName)
+	logger.Success("Logged out of Praxis account %s", displayName)
 
 	return nil
 }

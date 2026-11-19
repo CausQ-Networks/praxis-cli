@@ -26,7 +26,7 @@ jobs:
 
       - name: Run nix-update
         run: |
-          nix run nixpkgs#nix-update -- --flake pangolin-cli --no-src --version skip
+          nix run nixpkgs#nix-update -- --flake praxis-cli --no-src --version skip
 
       - name: Check for changes
         id: changes

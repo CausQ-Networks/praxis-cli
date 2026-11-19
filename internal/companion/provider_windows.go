@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 )
 
-const windowsAppName = "Pangolin"
+const windowsAppName = "Praxis"
 
 func defaultDesktopDataDir() string {
 	appData := os.Getenv("LOCALAPPDATA")

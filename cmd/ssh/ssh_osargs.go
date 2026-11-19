@@ -20,15 +20,15 @@ func sshPassThroughFromOS(osArgs []string, resourceID string) []string {
 		return nil
 	}
 	tail := append([]string{}, osArgs[sshIdx+1:]...)
-	tail = stripPangolinSSHKnownFlags(tail)
+	tail = stripPraxisSSHKnownFlags(tail)
 	tail = removeFirstTokenEqual(tail, resourceID)
 	return tail
 }
 
-// stripPangolinSSHKnownFlags removes pangolin-only tokens so they are not forwarded to ssh(1).
+// stripPraxisSSHKnownFlags removes pangolin-only tokens so they are not forwarded to ssh(1).
 // --port / -p are parsed by Cobra and applied via RunOpts.Port; stripping avoids duplicate port
 // flags in the ssh(1) argv built from passthrough.
-func stripPangolinSSHKnownFlags(in []string) []string {
+func stripPraxisSSHKnownFlags(in []string) []string {
 	out := make([]string, 0, len(in))
 	saidLegacyExec := false
 	for i := 0; i < len(in); {

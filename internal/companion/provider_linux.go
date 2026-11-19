@@ -9,14 +9,14 @@ import (
 	"path/filepath"
 )
 
-// The Pangolin Linux client keeps its per-user files under
-// $XDG_CONFIG_HOME/pangolin-client (normally ~/.config/pangolin-client), apart
-// from the CLI's ~/.config/pangolin.
-const linuxAppDirName = "pangolin-client"
+// The Praxis Linux client keeps its per-user files under
+// $XDG_CONFIG_HOME/praxis-client (normally ~/.config/praxis-client), apart
+// from the CLI's ~/.config/praxis.
+const linuxAppDirName = "praxis-client"
 
 // linuxAppBinary is the desktop client's executable, installed by its
 // deb, rpm and Arch packages.
-const linuxAppBinary = "pangolin-client"
+const linuxAppBinary = "praxis-client"
 
 func defaultDesktopDataDir() string {
 	if u := sudoUser(); u != nil {

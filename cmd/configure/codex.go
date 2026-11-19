@@ -10,7 +10,7 @@ import (
 	toml "github.com/pelletier/go-toml/v2"
 )
 
-// writeCodexConfig merges a "pangolin" model provider into
+// writeCodexConfig merges a "praxis" model provider into
 // $CODEX_HOME/config.toml (CODEX_HOME defaults to ~/.codex, matching Codex's
 // own resolution), preserving any other existing keys. NOTE: go-toml/v2
 // doesn't preserve comments/formatting on round-trip.
@@ -25,7 +25,7 @@ func writeCodexConfig(endpoint string, auth Auth) ([]string, error) {
 		return nil, err
 	}
 
-	m["model_provider"] = "pangolin"
+	m["model_provider"] = "praxis"
 
 	providers, ok := m["model_providers"].(map[string]interface{})
 	if !ok {
@@ -34,14 +34,14 @@ func writeCodexConfig(endpoint string, auth Auth) ([]string, error) {
 	}
 
 	pangolin := map[string]interface{}{
-		"name":     "Pangolin AI Gateway",
+		"name":     "Praxis AI Gateway",
 		"base_url": endpoint + "/v1",
 		"wire_api": "responses",
 	}
 	if auth.Mode == AuthModeKeyed {
 		pangolin["env_key"] = "PANGOLIN_API_KEY"
 	}
-	providers["pangolin"] = pangolin
+	providers["praxis"] = pangolin
 
 	data, err := toml.Marshal(m)
 	if err != nil {
@@ -125,12 +125,12 @@ func resetCodexConfig() ([]string, error) {
 	changed := false
 	// Only clear the active provider if it's still pointing at ours - the
 	// user may have switched back to another provider by hand.
-	if m["model_provider"] == "pangolin" {
+	if m["model_provider"] == "praxis" {
 		delete(m, "model_provider")
 		changed = true
 	}
 	if providers, ok := m["model_providers"].(map[string]interface{}); ok {
-		if deleteKey(providers, "pangolin") {
+		if deleteKey(providers, "praxis") {
 			changed = true
 		}
 		pruneEmptyMap(m, "model_providers")

@@ -36,7 +36,7 @@ func statusMain(cmd *cobra.Command) error {
 	if companionState.Enabled && !companionState.Active {
 		logger.Info("Status: not logged in")
 		logger.Info("Open %s to log in", companionState.ProviderName)
-		logger.Info("Or run 'pangolin companion disable' to use standalone CLI auth")
+		logger.Info("Or run 'praxis companion disable' to use standalone CLI auth")
 		return fmt.Errorf("not logged in")
 	}
 
@@ -45,9 +45,9 @@ func statusMain(cmd *cobra.Command) error {
 		logger.Info("Status: %s", err)
 		if companionState.Enabled {
 			logger.Info("Open %s to log in", companionState.ProviderName)
-			logger.Info("Or run 'pangolin companion disable' to use standalone CLI auth")
+			logger.Info("Or run 'praxis companion disable' to use standalone CLI auth")
 		} else {
-			logger.Info("Run 'pangolin login' to authenticate")
+			logger.Info("Run 'praxis login' to authenticate")
 		}
 		return err
 	}

@@ -29,7 +29,7 @@ func BlueprintCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "blueprint",
 		Short: "Apply a blueprint",
-		Long:  "Apply a YAML blueprint to the Pangolin server. --file may be a glob pattern (e.g. -f 'inference-*.yaml') or given multiple times; every matching file is applied one by one.",
+		Long:  "Apply a YAML blueprint to the Praxis server. --file may be a glob pattern (e.g. -f 'inference-*.yaml') or given multiple times; every matching file is applied one by one.",
 		Args:  cobra.ArbitraryArgs,
 		PreRunE: func(cmd *cobra.Command, args []string) error {
 			// Integration API: any of the three flags implies all three are required (avoids silent session fallback).

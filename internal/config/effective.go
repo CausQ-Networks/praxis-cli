@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// Defaults `pangolin up` uses for a setting nothing else sets. They're the
+// Defaults `praxis up` uses for a setting nothing else sets. They're the
 // defaults of its flags.
 const (
 	DefaultTunnelDNS               = false
@@ -23,7 +23,7 @@ const (
 	SourceGlobal   SettingSource = "global"
 	SourceOrg      SettingSource = "org"
 	SourceServer   SettingSource = "server"
-	SourceSelected SettingSource = "selected" // exit node chosen with `pangolin select exit-node`
+	SourceSelected SettingSource = "selected" // exit node chosen with `praxis select exit-node`
 )
 
 // EffectiveSetting is one setting as each source has it and the value that
@@ -38,10 +38,10 @@ type EffectiveSetting struct {
 }
 
 // EffectiveSettings resolves every per-org setting for orgID the way
-// `pangolin up` does without flags: server settings > the org's entry in the
+// `praxis up` does without flags: server settings > the org's entry in the
 // config file > the global config > defaults. The exit node is the exception;
 // see EffectiveExitNode. selectedExitNode is the exit node saved by
-// `pangolin select exit-node`, or 0.
+// `praxis select exit-node`, or 0.
 func EffectiveSettings(cfg *Config, orgID string, server *ClientSettings, selectedExitNode int) []EffectiveSetting {
 	settings := make([]EffectiveSetting, 0, len(OrgConfigOptions))
 	for _, key := range OrgConfigOptions {
@@ -131,7 +131,7 @@ func serverValue(s *ClientSettings, key string) string {
 	}
 }
 
-// defaultValue is what `pangolin up` uses when nothing sets key; "" for the
+// defaultValue is what `praxis up` uses when nothing sets key; "" for the
 // list settings and the exit node, which default to none.
 func defaultValue(key string) string {
 	switch key {

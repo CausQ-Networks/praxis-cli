@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	AgentName = "Pangolin CLI"
+	AgentName = "Praxis CLI"
 )
 
 // Client handles communication with the OLM process via Unix socket

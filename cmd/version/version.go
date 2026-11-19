@@ -37,6 +37,6 @@ func versionMain() {
 			logger.Info("Release: %s", latest.URL)
 		}
 		fmt.Println()
-		logger.Info("Run 'pangolin update' to update to the latest version")
+		logger.Info("Run 'praxis update' to update to the latest version")
 	}
 }

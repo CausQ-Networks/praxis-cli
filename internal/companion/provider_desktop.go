@@ -14,7 +14,7 @@ import (
 
 const accountsFileName = "accounts.json"
 
-// desktopProvider reads the Pangolin desktop client's session, on Windows and
+// desktopProvider reads the Praxis desktop client's session, on Windows and
 // Linux alike: account details from its accounts.json, and secrets from its
 // manager service, which only the manager can read.
 type desktopProvider struct {

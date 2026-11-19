@@ -9,7 +9,7 @@ func ApplyCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "apply",
 		Short: "Apply commands",
-		Long:  "Apply resources to the Pangolin server",
+		Long:  "Apply resources to the Praxis server",
 	}
 
 	cmd.AddCommand(blueprint.BlueprintCmd())

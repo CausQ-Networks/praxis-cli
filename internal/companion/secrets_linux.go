@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// linuxDaemonSocketPath is the Pangolin Linux client daemon's socket.
-const linuxDaemonSocketPath = "/run/pangolin-client/manager.sock"
+// linuxDaemonSocketPath is the Praxis Linux client daemon's socket.
+const linuxDaemonSocketPath = "/run/praxis-client/manager.sock"
 
 // daemonRequestCLISecrets is the request byte the daemon answers with a
 // user's secrets. It is followed by the UID whose secrets are wanted: the
@@ -35,7 +35,7 @@ func (c *socketSecretsClient) GetUserSecrets(userID string) (UserSecrets, error)
 
 	conn, err := net.DialTimeout("unix", c.socketPath, 3*time.Second)
 	if err != nil {
-		return UserSecrets{}, fmt.Errorf("connect to the Pangolin client daemon: %w", err)
+		return UserSecrets{}, fmt.Errorf("connect to the Praxis client daemon: %w", err)
 	}
 	defer conn.Close()
 	_ = conn.SetDeadline(time.Now().Add(5 * time.Second))

@@ -13,8 +13,8 @@ import (
 
 func CompanionCmd() *cobra.Command {
 	clientName := companion.PlatformProviderName()
-	short := "Manage companion mode with the Pangolin desktop app"
-	long := "Enable or disable companion mode, which uses the Pangolin desktop app for authentication."
+	short := "Manage companion mode with the Praxis desktop app"
+	long := "Enable or disable companion mode, which uses the Praxis desktop app for authentication."
 	if clientName != "" {
 		short = "Manage companion mode with " + clientName
 		long = "Enable or disable companion mode, which uses " + clientName + " for authentication."
@@ -69,7 +69,7 @@ func companionEnableMain(cmd *cobra.Command, args []string) error {
 	}
 
 	logger.Success("Companion mode enabled")
-	logger.Info("This takes effect on the next pangolin command.")
+	logger.Info("This takes effect on the next praxis command.")
 	if companion.RequiredDesktopAppVersion() != "" {
 		clientName := companion.PlatformProviderName()
 		logger.Info("Companion mode requires %s version %s or later.", clientName, companion.RequiredDesktopAppVersion())
@@ -89,7 +89,7 @@ func companionDisableMain(cmd *cobra.Command, args []string) error {
 	}
 
 	logger.Success("Companion mode disabled")
-	logger.Info("This takes effect on the next pangolin command.")
+	logger.Info("This takes effect on the next praxis command.")
 	return nil
 }
 

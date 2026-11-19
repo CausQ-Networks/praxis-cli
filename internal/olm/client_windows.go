@@ -14,14 +14,14 @@ import (
 const defaultSocketPath = `\\.\pipe\pangolin-olm`
 
 // ServiceSocketPath is the named pipe the CLI's own Windows client service
-// (`pangolin service install client` / `pangolin up client`) listens on. It is
+// (`praxis service install client` / `praxis up client`) listens on. It is
 // distinct from defaultSocketPath so the service can't collide with the
 // desktop app's olm instance on the same machine.
-const ServiceSocketPath = `\\.\pipe\pangolin-client`
+const ServiceSocketPath = `\\.\pipe\praxis-client`
 
-// CompanionAgentName is the OLM agent identifier used by the Pangolin Windows Client.
+// CompanionAgentName is the OLM agent identifier used by the Praxis Windows Client.
 // Must match the Agent value in the Windows app's OLM tunnel config.
-const CompanionAgentName = "Pangolin Windows"
+const CompanionAgentName = "Praxis Windows"
 
 func getDefaultSocketPath() string {
 	return defaultSocketPath

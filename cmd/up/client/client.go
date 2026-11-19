@@ -97,7 +97,7 @@ On Windows, only machine clients are supported: --id, --secret, and
 --endpoint must all be passed explicitly. Interactive login isn't
 supported - use the desktop app for that. The tunnel also can't run
 directly from a console process there, so this installs the same
-background service 'pangolin service install client' would, tails its
+background service 'praxis service install client' would, tails its
 logs, and removes the service again when you press Ctrl+C.`,
 		PreRunE: func(cmd *cobra.Command, args []string) error {
 			// Fall back to environment variables when the corresponding flag
@@ -116,7 +116,7 @@ logs, and removes the service again when you press Ctrl+C.`,
 				}
 			}
 			if !cmd.Flags().Changed("endpoint") {
-				if v := os.Getenv("PANGOLIN_ENDPOINT"); v != "" {
+				if v := os.Getenv("PRAXIS_ENDPOINT"); v != "" {
 					opts.Endpoint = v
 				}
 			}
@@ -130,7 +130,7 @@ logs, and removes the service again when you press Ctrl+C.`,
 			// standalone olm client (see olm/config.go) for every other
 			// flag not explicitly set on the command line. This lets an
 			// EnvironmentFile written for the olm binary also configure
-			// `pangolin up client` unchanged.
+			// `praxis up client` unchanged.
 			if err := applyUpEnvOverrides(cmd); err != nil {
 				return err
 			}
@@ -142,7 +142,7 @@ logs, and removes the service again when you press Ctrl+C.`,
 
 			// Windows only supports machine clients (explicit
 			// --id/--secret/--endpoint, run under a service - see
-			// `pangolin service install client`). Interactively logging in
+			// `praxis service install client`). Interactively logging in
 			// and letting this command manage keyring/account credentials
 			// itself isn't implemented on Windows.
 			if runtime.GOOS == "windows" && (opts.ID == "" || opts.Secret == "" || opts.Endpoint == "") {
@@ -183,23 +183,23 @@ logs, and removes the service again when you press Ctrl+C.`,
 	cmd.Flags().StringVar(&opts.Endpoint, "endpoint", "", "Client endpoint (required if not logged in)")
 	cmd.Flags().IntVar(&opts.MTU, "mtu", config.DefaultMTU, "Maximum transmission unit")
 	cmd.Flags().StringVar(&opts.DNS, "netstack-dns", "", "DNS `server` to use for Netstack. This handles DNS resolution outside of the upstream servers.")
-	cmd.Flags().StringVar(&opts.InterfaceName, "interface-name", "pangolin", "Interface `name`")
+	cmd.Flags().StringVar(&opts.InterfaceName, "interface-name", "praxis", "Interface `name`")
 	cmd.Flags().StringVar(&opts.LogLevel, "log-level", "info", "Log level")
 	cmd.Flags().StringVar(&opts.HTTPAddr, "http-addr", "", "HTTP address for API server")
 	cmd.Flags().DurationVar(&opts.PingInterval, "ping-interval", 5*time.Second, "Ping `interval`")
 	cmd.Flags().DurationVar(&opts.PingTimeout, "ping-timeout", 5*time.Second, "Ping `timeout`")
 	cmd.Flags().BoolVar(&opts.Holepunch, "holepunch", true, "Enable holepunching")
 	cmd.Flags().StringVar(&opts.TlsClientCert, "tls-client-cert", "", "TLS client certificate `path`")
-	cmd.Flags().BoolVar(&opts.OverrideDNS, "override-dns", config.DefaultOverrideDNS, "When enabled, the client uses custom DNS servers to resolve internal resources and aliases. This overrides your system's default DNS settings. Queries that cannot be resolved as a Pangolin resource will be forwarded to your configured Upstream DNS Server.")
-	cmd.Flags().BoolVar(&opts.TunnelDNS, "tunnel-dns", config.DefaultTunnelDNS, "When enabled, DNS queries are routed through the tunnel for remote resolution. To ensure queries are tunneled correctly, you must define the DNS server as a Pangolin resource and enter its address as an Upstream DNS Server.")
+	cmd.Flags().BoolVar(&opts.OverrideDNS, "override-dns", config.DefaultOverrideDNS, "When enabled, the client uses custom DNS servers to resolve internal resources and aliases. This overrides your system's default DNS settings. Queries that cannot be resolved as a Praxis resource will be forwarded to your configured Upstream DNS Server.")
+	cmd.Flags().BoolVar(&opts.TunnelDNS, "tunnel-dns", config.DefaultTunnelDNS, "When enabled, DNS queries are routed through the tunnel for remote resolution. To ensure queries are tunneled correctly, you must define the DNS server as a Praxis resource and enter its address as an Upstream DNS Server.")
 	cmd.Flags().StringSliceVar(&opts.UpstreamDNS, "upstream-dns", []string{}, "List of DNS servers to use for external DNS resolution if overriding system DNS")
 	cmd.Flags().StringSliceVar(&opts.MatchDomains, "match-domains", nil, "FQDN wildcard patterns (e.g. '*.proxy.internal') to check against local records/upstream DNS; queries for non-matching domains go directly to the system's DNS servers (default: match all domains, or the value from config if set)")
 	cmd.Flags().BoolVar(&opts.PreferLocalRoutes, "prefer-local-routes", config.DefaultPreferLocalRoutes, "Add tunnel routes with a high metric so overlapping local/connected routes take precedence (default false)")
 	cmd.Flags().BoolVar(&opts.ExitNodeTakesPrecedence, "exit-node-takes-precedence", config.DefaultExitNodeTakesPrecedence, "Do not add routes or resolve aliases for individual resources, so all traffic is sent through the exit node instead of directly to resources (default false)")
 	cmd.Flags().BoolVar(&opts.DisableRelay, "disable-relay", false, "Disable relay connections (default false)")
 	cmd.Flags().BoolVar(&opts.SubnetRouter, "subnet-router", false, "Enable this client to act as a subnet router: traffic forwarded from the local network is NATed to this client's own tunnel IP before going out over the tunnel. Linux only, requires CAP_NET_ADMIN. (default false)")
-	cmd.Flags().StringVar(&opts.ExitNode, "exit-node", "", "Exit node `NICE-ID` to route all traffic through for this connection, overriding the exit node saved by 'pangolin select exit-node'. Requires being logged in")
-	cmd.Flags().IntSliceVar(&opts.GatewaySiteIDs, "exit-node-site-ids", nil, "Site IDs to route all traffic through as an exit node (default: the exit node saved by 'pangolin select exit-node', if any). Requires --exit-node-resource-id")
+	cmd.Flags().StringVar(&opts.ExitNode, "exit-node", "", "Exit node `NICE-ID` to route all traffic through for this connection, overriding the exit node saved by 'praxis select exit-node'. Requires being logged in")
+	cmd.Flags().IntSliceVar(&opts.GatewaySiteIDs, "exit-node-site-ids", nil, "Site IDs to route all traffic through as an exit node (default: the exit node saved by 'praxis select exit-node', if any). Requires --exit-node-resource-id")
 	cmd.Flags().IntVar(&opts.GatewaySiteResourceID, "exit-node-resource-id", 0, "ID of the exit node resource the --exit-node-site-ids belong to, so changes to that resource are applied while connected")
 	cmd.MarkFlagsMutuallyExclusive("exit-node", "exit-node-site-ids")
 	cmd.MarkFlagsMutuallyExclusive("exit-node", "exit-node-resource-id")
@@ -380,7 +380,7 @@ func clientUpMain(cmd *cobra.Command, opts *ClientUpCmdOpts, extraArgs []string)
 		// it always has to go through a Windows Service. PreRunE already
 		// required machine-client credentials for this platform, so just
 		// install/tail/uninstall the same service
-		// `pangolin service install client` manages.
+		// `praxis service install client` manages.
 		if err := runWindowsMachineClient(opts); err != nil {
 			logger.Error("Error: %v", err)
 			return err
@@ -419,7 +419,7 @@ func clientUpMain(cmd *cobra.Command, opts *ClientUpCmdOpts, extraArgs []string)
 	} else if credentialsFromKeyring {
 		activeAccount, err := accountStore.ActiveAccount()
 		if err != nil {
-			logger.Error("Error: %v. Run `pangolin login` to login", err)
+			logger.Error("Error: %v. Run `praxis login` to login", err)
 			return err
 		}
 		endpoint = activeAccount.Host
@@ -459,7 +459,7 @@ func clientUpMain(cmd *cobra.Command, opts *ClientUpCmdOpts, extraArgs []string)
 	if credentialsFromKeyring {
 		activeAccount, err := accountStore.ActiveAccount()
 		if err != nil {
-			logger.Error("Error: %v. Run `pangolin login` to login", err)
+			logger.Error("Error: %v. Run `praxis login` to login", err)
 			return err
 		}
 
@@ -502,7 +502,7 @@ func clientUpMain(cmd *cobra.Command, opts *ClientUpCmdOpts, extraArgs []string)
 		if activeAccount.OrgID == "" {
 			err := errors.New("organization not selected")
 			logger.Error("Error: %v", err)
-			logger.Info("Run `pangolin select org` to select an organization or pass --org [id] to the command")
+			logger.Info("Run `praxis select org` to select an organization or pass --org [id] to the command")
 			return err
 		}
 
@@ -567,7 +567,7 @@ func clientUpMain(cmd *cobra.Command, opts *ClientUpCmdOpts, extraArgs []string)
 	// Handle detached mode - subprocess self without --attach flag
 	// Skip detached mode if we're a subprocess spawned by the parent process
 	// We use an environment variable to detect this, rather than checking if running as root,
-	// because the user might run "sudo pangolin up" directly and still expect the TUI
+	// because the user might run "sudo praxis up" directly and still expect the TUI
 	isSubprocess := os.Getenv("PANGOLIN_SUBPROCESS") == "1"
 	if !opts.Attached && !isSubprocess {
 		executable, err := os.Executable()
@@ -845,7 +845,7 @@ func clientUpMain(cmd *cobra.Command, opts *ClientUpCmdOpts, extraArgs []string)
 		Version:    versionpkg.Version,
 		Agent:      defaultAgent,
 		OlmVersion: versionpkg.OlmVersionOverride,
-		// Spawn the pangolin binary itself in watchdog mode after a DNS
+		// Spawn the praxis binary itself in watchdog mode after a DNS
 		// override is installed. The watchdog will reset DNS if this
 		// process dies before it can restore the original configuration.
 		WatchdogSubcommand: []string{"watchdog"},

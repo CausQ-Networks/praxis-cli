@@ -146,8 +146,8 @@ jobs:
     runs-on: [self-hosted, linux, x64]
     timeout-minutes: 120
     env:
-      DOCKERHUB_IMAGE: docker.io/fosrl/cli
-      DOCKERHUB_IMAGE2: docker.io/fosrl/pangolin-cli
+      DOCKERHUB_IMAGE: docker.io/CausQ-Networks/praxis-cli
+      DOCKERHUB_IMAGE2: docker.io/fosrl/praxis-cli
       GHCR_IMAGE: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
       IMAGE_LICENSE: ${{ github.event.repository.license.spdx_id || 'NOASSERTION' }}
       IMAGE_CREATED: ${{ needs.pre-run.outputs.image_created }}
@@ -307,8 +307,8 @@ jobs:
     runs-on: [self-hosted, linux, arm64] # NOTE: ensure label exists on runner
     timeout-minutes: 120
     env:
-      DOCKERHUB_IMAGE: docker.io/fosrl/cli
-      DOCKERHUB_IMAGE2: docker.io/fosrl/pangolin-cli
+      DOCKERHUB_IMAGE: docker.io/CausQ-Networks/praxis-cli
+      DOCKERHUB_IMAGE2: docker.io/fosrl/praxis-cli
       GHCR_IMAGE: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
       IMAGE_LICENSE: ${{ github.event.repository.license.spdx_id || 'NOASSERTION' }}
       IMAGE_CREATED: ${{ needs.pre-run.outputs.image_created }}
@@ -435,8 +435,8 @@ jobs:
     runs-on: [self-hosted, linux, arm64]
     timeout-minutes: 120
     env:
-      DOCKERHUB_IMAGE: docker.io/fosrl/cli
-      DOCKERHUB_IMAGE2: docker.io/fosrl/pangolin-cli
+      DOCKERHUB_IMAGE: docker.io/CausQ-Networks/praxis-cli
+      DOCKERHUB_IMAGE2: docker.io/fosrl/praxis-cli
       GHCR_IMAGE: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
       IMAGE_LICENSE: ${{ github.event.repository.license.spdx_id || 'NOASSERTION' }}
       IMAGE_CREATED: ${{ needs.pre-run.outputs.image_created }}
@@ -555,8 +555,8 @@ jobs:
     runs-on: [self-hosted, linux, x64] # NOTE: ensure label exists on runner
     timeout-minutes: 30
     env:
-      DOCKERHUB_IMAGE: docker.io/fosrl/cli
-      DOCKERHUB_IMAGE2: docker.io/fosrl/pangolin-cli
+      DOCKERHUB_IMAGE: docker.io/CausQ-Networks/praxis-cli
+      DOCKERHUB_IMAGE2: docker.io/fosrl/praxis-cli
       GHCR_IMAGE: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
       TAG: ${{ needs.build-amd.outputs.tag }}
       IS_RC: ${{ needs.build-amd.outputs.is_rc }}
@@ -611,7 +611,7 @@ jobs:
             "${DOCKERHUB_IMAGE}:arm64-${TAG}" \
             "${DOCKERHUB_IMAGE}:armv7-${TAG}"
 
-      - name: Create & push multi-arch index (Docker Hub pangolin-cli :TAG) via imagetools
+      - name: Create & push multi-arch index (Docker Hub praxis-cli :TAG) via imagetools
         shell: bash
         run: |
           set -euo pipefail
@@ -645,7 +645,7 @@ jobs:
               "${DOCKERHUB_IMAGE}:arm64-${TAG}" \
               "${DOCKERHUB_IMAGE}:armv7-${TAG}"
 
-            echo "Publishing Docker Hub pangolin-cli tag ${t} -> ${TAG}"
+            echo "Publishing Docker Hub praxis-cli tag ${t} -> ${TAG}"
             docker buildx imagetools create \
               -t "${DOCKERHUB_IMAGE2}:${t}" \
               "${DOCKERHUB_IMAGE2}:amd64-${TAG}" \
@@ -667,8 +667,8 @@ jobs:
       dh_digest: ${{ steps.digests.outputs.dh_digest }}
       dh2_digest: ${{ steps.digests.outputs.dh2_digest }}
     env:
-      DOCKERHUB_IMAGE: docker.io/fosrl/cli
-      DOCKERHUB_IMAGE2: docker.io/fosrl/pangolin-cli
+      DOCKERHUB_IMAGE: docker.io/CausQ-Networks/praxis-cli
+      DOCKERHUB_IMAGE2: docker.io/fosrl/praxis-cli
       GHCR_IMAGE: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
       TAG: ${{ needs.build-amd.outputs.tag }}
       IS_RC: ${{ needs.build-amd.outputs.is_rc }}
@@ -788,17 +788,17 @@ jobs:
         if: ${{ env.DH_DIGEST != '' }}
         uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
         with:
-          subject-name: index.docker.io/fosrl/cli
+          subject-name: index.docker.io/CausQ-Networks/praxis-cli
           subject-digest: ${{ env.DH_DIGEST }}
           push-to-registry: true
           show-summary: true
 
-      - name: Attest build provenance (Docker Hub pangolin-cli)
+      - name: Attest build provenance (Docker Hub praxis-cli)
         continue-on-error: true
         if: ${{ env.DH2_DIGEST != '' }}
         uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
         with:
-          subject-name: index.docker.io/fosrl/pangolin-cli
+          subject-name: index.docker.io/fosrl/praxis-cli
           subject-digest: ${{ env.DH2_DIGEST }}
           push-to-registry: true
           show-summary: true
@@ -873,7 +873,7 @@ jobs:
             --predicate sbom.spdx.json \
             "${DH_REF}"
 
-      - name: Create SBOM attestation (Docker Hub pangolin-cli, key)
+      - name: Create SBOM attestation (Docker Hub praxis-cli, key)
         continue-on-error: true
         env:
           COSIGN_YES: "true"
@@ -930,7 +930,7 @@ jobs:
           set -euo pipefail
           cosign sign --key env://COSIGN_PRIVATE_KEY --recursive "${DH_REF}"
 
-      - name: Sign Docker Hub pangolin-cli digest (key, recursive)
+      - name: Sign Docker Hub praxis-cli digest (key, recursive)
         continue-on-error: true
         env:
           COSIGN_YES: "true"
@@ -958,7 +958,7 @@ jobs:
             --certificate-identity "https://github.com/${{ github.workflow_ref }}" \
             "${DH_REF}" -o text
 
-      - name: Keyless sign & verify Docker Hub pangolin-cli digest (OIDC)
+      - name: Keyless sign & verify Docker Hub praxis-cli digest (OIDC)
         continue-on-error: true
         if: ${{ env.DH2_REF != '' }}
         env:
@@ -986,7 +986,7 @@ jobs:
           cosign verify --key env://COSIGN_PUBLIC_KEY "${DH_REF}" -o text
           cosign verify --key env://COSIGN_PUBLIC_KEY "${DOCKERHUB_IMAGE}:${TAG}" -o text
 
-      - name: Verify signature (public key) Docker Hub pangolin-cli digest + tag
+      - name: Verify signature (public key) Docker Hub praxis-cli digest + tag
         continue-on-error: true
         if: ${{ env.DH2_REF != '' }}
         env:
@@ -1027,7 +1027,7 @@ jobs:
     env:
       # Developer ID Application certificate (SHA-1) and identifier used for codesign
       SIGN_ID: 84F39F4BE29E7F96DFBE13431010525C534FBC67
-      BUNDLE_ID: io.fossorial
+      BUNDLE_ID: com.causq.praxis
     steps:
       - name: Download unsigned binaries
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
@@ -1134,10 +1134,10 @@ jobs:
         shell: pwsh
     env:
       TAG: ${{ needs.build-amd.outputs.tag }}
-      EXE: bin/pangolin-cli_windows_amd64.exe
-      MSI: bin/pangolin-cli_windows_installer.msi
-      WXS: pangolin-cli.wxs
-      PRODUCT_NAME: Pangolin CLI
+      EXE: bin/praxis-cli_windows_amd64.exe
+      MSI: bin/praxis-cli_windows_installer.msi
+      WXS: praxis-cli.wxs
+      PRODUCT_NAME: Praxis CLI
       PRODUCT_URL: https://pangolin.net
       JSIGN_VERSION: "7.6"
       JSIGN_SHA256: 6cf58aa080e7ff82656f320cff8d4a3bff30408df8766806dcba3740dd839fa5
@@ -1147,7 +1147,7 @@ jobs:
       TSA_URL: http://timestamp.digicert.com
       SM_KEY_ALIAS: ${{ vars.SM_KEY_ALIAS || '8657e61d-c2bb-4603-8907-530e879e00bf' }}  # DigiCert ONE certificate ID (not the keypair alias)
     steps:
-      - name: Checkout tagged commit (for pangolin-cli.wxs)
+      - name: Checkout tagged commit (for praxis-cli.wxs)
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: refs/tags/${{ needs.build-amd.outputs.tag }}
@@ -1296,8 +1296,8 @@ jobs:
           REPO="${REPO,,}"
           {
             echo "GHCR_REF=ghcr.io/${OWNER}/${REPO}@${GHCR_DIGEST}"
-            if [ -n "${DH_DIGEST}" ]; then echo "DH_REF=docker.io/fosrl/cli@${DH_DIGEST}"; fi
-            if [ -n "${DH2_DIGEST}" ]; then echo "DH2_REF=docker.io/fosrl/pangolin-cli@${DH2_DIGEST}"; fi
+            if [ -n "${DH_DIGEST}" ]; then echo "DH_REF=docker.io/CausQ-Networks/praxis-cli@${DH_DIGEST}"; fi
+            if [ -n "${DH2_DIGEST}" ]; then echo "DH2_REF=docker.io/fosrl/praxis-cli@${DH2_DIGEST}"; fi
           } >> "$GITHUB_ENV"
 
       - name: Create GitHub Release (draft)

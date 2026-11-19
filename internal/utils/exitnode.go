@@ -7,7 +7,7 @@ import (
 )
 
 // ResolveSavedExitNode returns the resource ID and current site IDs of the exit
-// node saved by `pangolin select exit-node` on the active account, or 0/nil if
+// node saved by `praxis select exit-node` on the active account, or 0/nil if
 // none should be applied. Only the resource ID is saved (per account and org),
 // so its sites always come from the server and can't be stale
 // (or break if the resource's niceId was renamed away).
@@ -42,7 +42,7 @@ func ResolveSavedExitNode(savedResourceID int, orgID string, list func(orgID str
 		return g.SiteResourceID, g.SiteIDs
 	}
 
-	logger.Warning("Saved exit node no longer exists; not using it. Run 'pangolin select exit-node' and choose None to forget it")
+	logger.Warning("Saved exit node no longer exists; not using it. Run 'praxis select exit-node' and choose None to forget it")
 	return 0, nil
 }
 

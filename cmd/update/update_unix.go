@@ -13,8 +13,8 @@ import (
 func UpdateCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "update",
-		Short: "Update Pangolin CLI to the latest version",
-		Long:  "Update Pangolin CLI to the latest version by downloading and running the installation script",
+		Short: "Update Praxis CLI to the latest version",
+		Long:  "Update Praxis CLI to the latest version by downloading and running the installation script",
 		Run: func(cmd *cobra.Command, args []string) {
 			if err := updateMain(); err != nil {
 				os.Exit(1)
@@ -26,7 +26,7 @@ func UpdateCmd() *cobra.Command {
 }
 
 func updateMain() error {
-	logger.Info("Updating Pangolin CLI...")
+	logger.Info("Updating Praxis CLI...")
 
 	// Get the path of the current running binary
 	execPath, err := os.Executable()
@@ -37,18 +37,18 @@ func updateMain() error {
 	
 	logger.Debug("Current executable path: %s", execPath)
 
-	// Execute: curl -fsSL https://static.pangolin.net/get-cli.sh | bash -s -- --path /current/binary/path
-	updateCmd := exec.Command("sh", "-c", "curl -fsSL https://static.pangolin.net/get-cli.sh | bash -s -- --path "+execPath)
+	// Execute: curl -fsSL https://praxis.causq.com/get-cli.sh | bash -s -- --path /current/binary/path
+	updateCmd := exec.Command("sh", "-c", "curl -fsSL https://praxis.causq.com/get-cli.sh | bash -s -- --path "+execPath)
 	updateCmd.Stdin = os.Stdin
 	updateCmd.Stdout = os.Stdout
 	updateCmd.Stderr = os.Stderr
 
 	if err := updateCmd.Run(); err != nil {
-		logger.Error("Failed to update Pangolin CLI: %v", err)
+		logger.Error("Failed to update Praxis CLI: %v", err)
 		return err
 	}
 
-	logger.Success("Pangolin CLI updated successfully!")
+	logger.Success("Praxis CLI updated successfully!")
 
 	return nil
 }

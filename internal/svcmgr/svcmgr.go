@@ -1,5 +1,5 @@
 // Package svcmgr manages a persistent background service that supervises a
-// `pangolin up site` or `pangolin up client` process, restarting it
+// `praxis up site` or `praxis up client` process, restarting it
 // automatically on crash or reboot. It's backed by systemd on Linux,
 // launchd on macOS, and a native Windows Service on Windows - each platform
 // file implements the same Install/Uninstall/Status/Follow functions over
@@ -10,15 +10,15 @@ package svcmgr
 // builds Specs) and the platform backends (which sometimes need to special-
 // case a specific service - see svcmgr_windows.go's client handling).
 const (
-	SiteServiceName   = "pangolin-site"
-	ClientServiceName = "pangolin-client"
+	SiteServiceName   = "praxis-site"
+	ClientServiceName = "praxis-client"
 )
 
-// SupervisedEnvVar is set in the environment of the `pangolin up ...` child
+// SupervisedEnvVar is set in the environment of the `praxis up ...` child
 // process run by the Windows service host. A supervised child must restart
 // by exiting with RestartExitCode and letting the host relaunch it, rather
 // than spawning its own replacement that the host would not know about.
-const SupervisedEnvVar = "PANGOLIN_SERVICE_SUPERVISED"
+const SupervisedEnvVar = "PRAXIS_SERVICE_SUPERVISED"
 
 // RestartExitCode is the exit code a supervised child uses to ask the
 // service host to relaunch it (e.g. after a self-update or blueprint reload).
@@ -27,13 +27,13 @@ const RestartExitCode = 75
 // Spec describes a service to install.
 type Spec struct {
 	// Name is a unique, filesystem/registry-safe identifier for the
-	// service, e.g. "pangolin-site" or "pangolin-client".
+	// service, e.g. "praxis-site" or "praxis-client".
 	Name string
 	// DisplayName is a human-readable name shown by the OS service manager.
 	DisplayName string
 	// Description is a short human-readable summary of what the service does.
 	Description string
-	// Args are the arguments passed to the current pangolin executable to
+	// Args are the arguments passed to the current praxis executable to
 	// start the supervised process, e.g. []string{"up", "site"} or
 	// []string{"up", "client", "--attach"}. They must not contain
 	// credentials - use EnvVars for those.

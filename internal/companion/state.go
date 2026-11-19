@@ -68,13 +68,13 @@ func notReadySuggestion(provider Provider, dataDir string, session *Session) str
 	if activeUserID != "" && session == nil {
 		if RequiredDesktopAppVersion() != "" {
 			return fmt.Sprintf(
-				"Start %s (version %s or later) and log in, or run 'pangolin companion disable'.",
+				"Start %s (version %s or later) and log in, or run 'praxis companion disable'.",
 				provider.Name(),
 				RequiredDesktopAppVersion(),
 			)
 		}
 		return fmt.Sprintf(
-			"Start %s and log in, or run 'pangolin companion disable'.",
+			"Start %s and log in, or run 'praxis companion disable'.",
 			provider.Name(),
 		)
 	}
@@ -91,7 +91,7 @@ func MutatingAuthError(providerName string) error {
 	return fmt.Errorf(
 		"Authentication is managed by %s.\n"+
 			"Login, logout, and account, organization, or exit node changes must be done in %s.\n"+
-			"To use standalone CLI auth, run 'pangolin companion disable'.",
+			"To use standalone CLI auth, run 'praxis companion disable'.",
 		providerName,
 		providerName,
 	)

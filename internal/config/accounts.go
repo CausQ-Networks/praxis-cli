@@ -35,7 +35,7 @@ type Account struct {
 
 type OrgSettings struct {
 	// The exit node (a gateway-mode site resource) selected with `pangolin
-	// select exit-node`, re-applied by `pangolin up` for this org. Only the
+	// select exit-node`, re-applied by `praxis up` for this org. Only the
 	// resource ID is stored (not the niceId, which can be renamed); its sites
 	// are looked up from the server on every start so they can't go stale.
 	ExitNodeResourceID int `mapstructure:"exitNodeResourceId" json:"exitNodeResourceId,omitempty"`
@@ -210,7 +210,7 @@ type ServerInfo struct {
 func newAccountViper() (*viper.Viper, error) {
 	v := viper.New()
 
-	dir, err := GetPangolinConfigDir()
+	dir, err := GetPraxisConfigDir()
 	if err != nil {
 		return nil, err
 	}

@@ -1,5 +1,5 @@
 {
-  description = "pangolin-cli - a VPN client for pangolin";
+  description = "praxis-cli - a VPN client for pangolin";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -19,8 +19,8 @@
       system: let
         pkgs = pkgsFor system;
       in rec {
-        pangolin-cli = pkgs.buildGoModule (finalAttrs: {
-          pname = "pangolin-cli";
+        praxis-cli = pkgs.buildGoModule (finalAttrs: {
+          pname = "praxis-cli";
           version = "0.20.0";
           src = ./.;
 
@@ -37,11 +37,11 @@
             homepage = "https://github.com/fosrl/cli";
             license = licenses.unfree;
             maintainers = [];
-            mainProgram = "pangolin-cli";
+            mainProgram = "praxis-cli";
           };
         });
 
-        default = pangolin-cli;
+        default = praxis-cli;
       }
     );
 

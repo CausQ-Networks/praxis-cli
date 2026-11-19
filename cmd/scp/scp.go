@@ -16,7 +16,7 @@ import (
 var (
 	errHostnameRequired = errors.New("API did not return a hostname for the connection")
 	errNoClientRunning  = errors.New("No client is currently running. Start the client first.")
-	errScpOperands      = errors.New("scp requires at least one remote operand; example: pangolin scp ./local-file my-server.internal:/remote/path")
+	errScpOperands      = errors.New("scp requires at least one remote operand; example: praxis scp ./local-file my-server.internal:/remote/path")
 	errNoRemoteOperand  = errors.New("no remote operand found; at least one of source or destination must be a remote path (host:path or user@host:path)")
 )
 
@@ -38,9 +38,9 @@ func SCPCmd() *cobra.Command {
 Use the resource alias or identifier as the host in remote operands, exactly as you would with regular scp.
 The resource alias is resolved to the connected hostname transparently.
 Examples:
-  pangolin scp ./local-file my-server.internal:/remote/path
-  pangolin scp my-server.internal:/var/log/syslog ./syslog
-  pangolin scp -r ./dir my-server.internal:~/
+  praxis scp ./local-file my-server.internal:/remote/path
+  praxis scp my-server.internal:/var/log/syslog ./syslog
+  praxis scp -r ./dir my-server.internal:~/
 
 Set PANGOLIN_SCP_BINARY to the full path of scp(1) to override PATH lookup on all platforms.`,
 		PreRunE: func(c *cobra.Command, args []string) error {

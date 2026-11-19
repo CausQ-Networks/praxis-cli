@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Get Pangolin - Cross-platform installation script
-# Usage: curl -fsSL https://raw.githubusercontent.com/fosrl/cli/refs/heads/main/get-cli.sh | sh
+# Get Praxis - Cross-platform installation script
+# Usage: curl -fsSL https://raw.githubusercontent.com/CausQ-Networks/praxis-cli/refs/heads/main/get-cli.sh | sh
 
 set -e
 
@@ -12,8 +12,8 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # GitHub repository info
-REPO="fosrl/cli"
-VERSIONS_API_URL="https://api.fossorial.io/api/v1/versions"
+REPO="CausQ-Networks/praxis-cli"
+VERSIONS_API_URL="https://api.github.com/repos/CausQ-Networks/praxis-cli/releases/latest"
 
 # Output helpers
 print_status() {
@@ -132,14 +132,14 @@ parse_path_arg() {
     done
 }
 
-# Detect an existing pangolin binary location.
+# Detect an existing praxis binary location.
 # Tries unprivileged which first, then sudo which (for binaries only visible to root).
 # Returns the full path of the binary, or empty string if not found.
 detect_existing_binary() {
     existing=""
 
     # Try unprivileged which first
-    existing=$(command -v pangolin 2>/dev/null || true)
+    existing=$(command -v praxis 2>/dev/null || true)
     if [ -n "$existing" ]; then
         printf '%s' "$existing"
         return
@@ -147,7 +147,7 @@ detect_existing_binary() {
 
     # Try sudo which — some installations land in paths only root can see in $PATH
     if command -v sudo >/dev/null 2>&1; then
-        existing=$(sudo which pangolin 2>/dev/null || true)
+        existing=$(sudo which praxis 2>/dev/null || true)
         if [ -n "$existing" ]; then
             printf '%s' "$existing"
             return
@@ -214,14 +214,14 @@ restore_selinux_context() {
     fi
 }
 
-# Download and install Pangolin
+# Download and install Praxis
 install_pangolin() {
     platform="$1"
     install_dir="$2"
     sudo_cmd="$3"
     custom_path="$4"
-    asset_name="pangolin-cli_${platform}"
-    final_name="pangolin"
+    asset_name="praxis-cli_${platform}"
+    final_name="praxis"
 
     case "$platform" in
         *windows*)
@@ -241,7 +241,7 @@ install_pangolin() {
         final_path="${install_dir}/${final_name}"
     fi
 
-    print_status "Downloading Pangolin from ${download_url}"
+    print_status "Downloading Praxis from ${download_url}"
 
     if command -v curl >/dev/null 2>&1; then
         curl -fsSL "$download_url" -o "$temp_file"
@@ -267,7 +267,7 @@ install_pangolin() {
 
     restore_selinux_context "$final_path" "$sudo_cmd"
 
-    print_status "Pangolin installed to ${final_path}"
+    print_status "Praxis installed to ${final_path}"
 
     # Check if install directory is in PATH
     if ! echo "$PATH" | grep -q "$install_dir"; then
@@ -286,11 +286,11 @@ verify_installation() {
         *windows*) exe_suffix=".exe" ;;
     esac
 
-    pangolin_path="${install_dir}/pangolin${exe_suffix}"
+    praxis_path="${install_dir}/praxis${exe_suffix}"
 
-    if [ -x "$pangolin_path" ]; then
+    if [ -x "$praxis_path" ]; then
         print_status "Installation successful!"
-        print_status "pangolin version: $("$pangolin_path" version 2>/dev/null || printf 'unknown')"
+        print_status "pangolin version: $("$praxis_path" version 2>/dev/null || printf 'unknown')"
         return 0
     else
         print_error "Installation failed. Binary not found or not executable."
@@ -304,9 +304,9 @@ main() {
     CUSTOM_PATH=$(parse_path_arg "$@")
 
     if [ -n "$CUSTOM_PATH" ]; then
-        print_status "Installing latest version of Pangolin to ${CUSTOM_PATH}..."
+        print_status "Installing latest version of Praxis to ${CUSTOM_PATH}..."
     else
-        print_status "Installing latest version of Pangolin..."
+        print_status "Installing latest version of Praxis..."
     fi
 
     print_status "Fetching latest version..."
@@ -325,7 +325,7 @@ main() {
         # Try to find an existing installation so we update the right place
         EXISTING_BINARY=$(detect_existing_binary)
         if [ -n "$EXISTING_BINARY" ]; then
-            print_status "Found existing Pangolin binary at ${EXISTING_BINARY}"
+            print_status "Found existing Praxis binary at ${EXISTING_BINARY}"
             CUSTOM_PATH="$EXISTING_BINARY"
             INSTALL_DIR=$(dirname "$EXISTING_BINARY")
             print_status "Will update existing installation at ${INSTALL_DIR}"
@@ -348,14 +348,14 @@ main() {
         if [ -x "$CUSTOM_PATH" ]; then
             print_status "Installation successful!"
             print_status "pangolin version: $("$CUSTOM_PATH" version 2>/dev/null || printf 'unknown')"
-            print_status "Pangolin is ready to use!"
+            print_status "Praxis is ready to use!"
         else
             print_error "Installation failed. Binary not found or not executable at ${CUSTOM_PATH}."
             exit 1
         fi
     elif verify_installation "$INSTALL_DIR"; then
-        print_status "Pangolin is ready to use!"
-        print_status "Run 'pangolin --help' to get started."
+        print_status "Praxis is ready to use!"
+        print_status "Run 'praxis --help' to get started."
     else
         exit 1
     fi

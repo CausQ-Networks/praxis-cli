@@ -34,7 +34,7 @@ tunnel traffic (full tunnel) through the sites backing it.
 While an exit node is active, a "None" option is shown to turn it off.
 
 With a running client the change takes effect immediately. Without one, the
-choice is saved and applied the next time you run 'pangolin up'.`,
+choice is saved and applied the next time you run 'praxis up'.`,
 		Run: func(cmd *cobra.Command, args []string) {
 			if err := exitNodeMain(cmd, &opts); err != nil {
 				os.Exit(1)
@@ -54,7 +54,7 @@ func exitNodeMain(cmd *cobra.Command, opts *ExitNodeCmdOpts) error {
 	}
 
 	// The client doesn't have to be running: the choice is saved to the config
-	// and applied by the next `pangolin up`. When it is running it is also
+	// and applied by the next `praxis up`. When it is running it is also
 	// applied live.
 	olmClient := olm.NewClient("")
 	running := olmClient.IsRunning()
@@ -172,12 +172,12 @@ func exitNodeMain(cmd *cobra.Command, opts *ExitNodeCmdOpts) error {
 	if running {
 		logger.Success("Routing all traffic through exit node: %s", selected.Name)
 	} else {
-		logger.Success("Exit node %s saved; it will be used the next time you run 'pangolin up'", selected.Name)
+		logger.Success("Exit node %s saved; it will be used the next time you run 'praxis up'", selected.Name)
 	}
 	return nil
 }
 
-// saveExitNode persists the exit node on the account so the next `pangolin up`
+// saveExitNode persists the exit node on the account so the next `praxis up`
 // re-applies it. With a running client the change is already live, so a save
 // failure is only a warning; without one, saving is the whole point, so it is
 // an error.

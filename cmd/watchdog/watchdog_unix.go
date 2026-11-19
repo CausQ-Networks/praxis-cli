@@ -14,7 +14,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// WatchdogCmd returns the hidden `pangolin watchdog` command. It is
+// WatchdogCmd returns the hidden `praxis watchdog` command. It is
 // spawned by the long-running client process so that DNS overrides are
 // reset if the client dies before restoring them. End users do not need
 // to invoke this directly.
@@ -59,7 +59,7 @@ not need to invoke this directly.`,
 
 	cmd.Flags().IntVar(&parentPID, "parent-pid", 0, "PID of the client process to monitor")
 	cmd.Flags().StringVar(&socketPath, "socket", "", "Path to the client unix socket (optional)")
-	cmd.Flags().StringVar(&interfaceName, "interface", "pangolin", "Tunnel interface name to clean up")
+	cmd.Flags().StringVar(&interfaceName, "interface", "praxis", "Tunnel interface name to clean up")
 	cmd.Flags().DurationVar(&interval, "interval", 5*time.Second, "Liveness check interval")
 	cmd.Flags().IntVar(&threshold, "threshold", 3, "Consecutive failures before DNS reset")
 

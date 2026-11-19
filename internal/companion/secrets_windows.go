@@ -9,7 +9,7 @@ import (
 	"github.com/Microsoft/go-winio"
 )
 
-const cliSecretsPipePath = `\\.\pipe\pangolin-manager-cli-secrets`
+const cliSecretsPipePath = `\\.\pipe\praxis-manager-cli-secrets`
 
 type pipeSecretsClient struct {
 	pipePath string

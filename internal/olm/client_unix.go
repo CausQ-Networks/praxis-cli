@@ -25,7 +25,7 @@ func GetDefaultSocketPath() string {
 // was given explicitly: the CLI's own if something is listening on it, else
 // the desktop app's if that is up, otherwise the default (so error messages
 // still name the expected socket). Unlike on Windows the two don't share a
-// path, so both can be up; the CLI's goes first so 'pangolin down' can stop it.
+// path, so both can be up; the CLI's goes first so 'praxis down' can stop it.
 func resolveClientSocketPath() string {
 	if desktopAppSocketPath == "" || socketListening(defaultSocketPath) {
 		return defaultSocketPath

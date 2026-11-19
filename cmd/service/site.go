@@ -63,7 +63,7 @@ any that are set override the file's values.`,
 			for k, v := range map[string]string{
 				"NEWT_ID":           opts.ID,
 				"NEWT_SECRET":       opts.Secret,
-				"PANGOLIN_ENDPOINT": opts.Endpoint,
+				"PRAXIS_ENDPOINT": opts.Endpoint,
 				"CONFIG_FILE":       opts.ConfigFile,
 			} {
 				if v != "" {
@@ -79,8 +79,8 @@ any that are set override the file's values.`,
 
 			spec := svcmgr.Spec{
 				Name:        siteServiceName,
-				DisplayName: "Pangolin Site (Newt)",
-				Description: "Runs 'pangolin up site' persistently in the background",
+				DisplayName: "Praxis Site (Newt)",
+				Description: "Runs 'praxis up site' persistently in the background",
 				Args:        []string{"up", "site"},
 				EnvVars:     envVars,
 			}
@@ -91,16 +91,16 @@ any that are set override the file's values.`,
 			}
 
 			logger.Success("Installed and started the %s service", siteServiceName)
-			logger.Info("Check status with 'pangolin service status site' or follow logs with 'pangolin service logs site -f'")
+			logger.Info("Check status with 'praxis service status site' or follow logs with 'praxis service logs site -f'")
 		},
 	}
 
 	cmd.Flags().StringVar(&opts.ID, "id", "", "Site ID (required unless --config-file is set)")
 	cmd.Flags().StringVar(&opts.Secret, "secret", "", "Site secret (required unless --config-file is set)")
-	cmd.Flags().StringVar(&opts.Endpoint, "endpoint", "", "Pangolin server endpoint (required unless --config-file is set)")
-	cmd.Flags().StringVar(&opts.ConfigFile, "config-file", "", "Path to a newt config file passed through to 'pangolin up site'")
+	cmd.Flags().StringVar(&opts.Endpoint, "endpoint", "", "Praxis server endpoint (required unless --config-file is set)")
+	cmd.Flags().StringVar(&opts.ConfigFile, "config-file", "", "Path to a newt config file passed through to 'praxis up site'")
 	cmd.Flags().BoolVar(&opts.DisableClients, "disable-clients", false, "Disable accepting client connections")
-	cmd.Flags().BoolVar(&opts.DisableSSH, "disable-ssh", false, "Disable Pangolin SSH")
+	cmd.Flags().BoolVar(&opts.DisableSSH, "disable-ssh", false, "Disable Praxis SSH")
 
 	return cmd
 }

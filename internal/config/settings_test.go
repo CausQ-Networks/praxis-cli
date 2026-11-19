@@ -57,7 +57,7 @@ func TestOrgConfigRoundTrip(t *testing.T) {
 	home := t.TempDir()
 	t.Setenv("HOME", home)
 	t.Setenv("SUDO_USER", "")
-	if err := os.MkdirAll(filepath.Join(home, ".config", "pangolin"), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Join(home, ".config", "praxis"), 0o755); err != nil {
 		t.Fatal(err)
 	}
 
@@ -122,7 +122,7 @@ func TestServerSettingsRoundTripThroughAccountStore(t *testing.T) {
 	home := t.TempDir()
 	t.Setenv("HOME", home)
 	t.Setenv("SUDO_USER", "")
-	if err := os.MkdirAll(filepath.Join(home, ".config", "pangolin"), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Join(home, ".config", "praxis"), 0o755); err != nil {
 		t.Fatal(err)
 	}
 

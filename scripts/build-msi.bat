@@ -1,5 +1,5 @@
 @echo off
-REM Build MSI for Pangolin CLI (WiX v4). Requires the `wix` CLI on PATH.
+REM Build MSI for Praxis CLI (WiX v4). Requires the `wix` CLI on PATH.
 REM 1) Build:  make go-build-release-windows-amd64 VERSION=X.Y.Z
 REM 2) Run from repo root:  scripts\build-msi.bat X.Y.Z
 REM    Or:  scripts\build-msi.bat X.Y.Z C:\path\to\folder-with-exe
@@ -21,8 +21,8 @@ if "%~2"=="" (
   set "BUILDDIR=%~2"
 )
 
-if not exist "%BUILDDIR%\pangolin-cli_windows_amd64.exe" (
-  echo ERROR: %BUILDDIR%\pangolin-cli_windows_amd64.exe not found. Build the Windows binary first. 1>&2
+if not exist "%BUILDDIR%\praxis-cli_windows_amd64.exe" (
+  echo ERROR: %BUILDDIR%\praxis-cli_windows_amd64.exe not found. Build the Windows binary first. 1>&2
   exit /b 1
 )
 
@@ -31,6 +31,6 @@ if not exist "third_party\wintun\amd64\wintun.dll" (
   exit /b 1
 )
 
-wix build -arch x64 -define "Version=%MSIVERSION%" -define "BuildDir=%BUILDDIR%" -o "%BUILDDIR%\pangolin-cli_windows_installer.msi" "pangolin-cli.wxs"
+wix build -arch x64 -define "Version=%MSIVERSION%" -define "BuildDir=%BUILDDIR%" -o "%BUILDDIR%\praxis-cli_windows_installer.msi" "praxis-cli.wxs"
 if errorlevel 1 exit /b %errorlevel%
-echo Created "%BUILDDIR%\pangolin-cli_windows_installer.msi" (version %MSIVERSION%)
+echo Created "%BUILDDIR%\praxis-cli_windows_installer.msi" (version %MSIVERSION%)

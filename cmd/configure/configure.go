@@ -75,8 +75,8 @@ func ConfigureCmd() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "configure <client> [key]",
-		Short: "Configure a local AI client to use a Pangolin AI gateway resource",
-		Long: "Writes local config files (e.g. ~/.claude/settings.json) so an AI client talks to a Pangolin\n" +
+		Short: "Configure a local AI client to use a Praxis AI gateway resource",
+		Long: "Writes local config files (e.g. ~/.claude/settings.json) so an AI client talks to a Praxis\n" +
 			"resource acting as an AI gateway. Supported clients: claude, codex, opencode, gemini.\n\n" +
 			"If [key] is omitted, an API key is fetched automatically for public resources (private/site\n" +
 			"resources need no key). Pass [key] to configure with a credential obtained elsewhere without\n" +
@@ -159,7 +159,7 @@ func configureMain(cmd *cobra.Command, opts ConfigureCmdOpts, args []string) err
 	return nil
 }
 
-// resetMain removes one client's Pangolin settings. It needs no org, resource
+// resetMain removes one client's Praxis settings. It needs no org, resource
 // or credential, so it makes no API calls and works while signed out.
 func resetMain(clientArg string, reset clientReset) error {
 	paths, err := reset()
@@ -168,11 +168,11 @@ func resetMain(clientArg string, reset clientReset) error {
 	}
 
 	if len(paths) == 0 {
-		logger.Info("No Pangolin configuration found for %s; nothing to remove", clientArg)
+		logger.Info("No Praxis configuration found for %s; nothing to remove", clientArg)
 		return nil
 	}
 
-	logger.Success("Removed Pangolin configuration for %s", clientArg)
+	logger.Success("Removed Praxis configuration for %s", clientArg)
 	for _, path := range paths {
 		logger.Info("Updated %s", path)
 	}

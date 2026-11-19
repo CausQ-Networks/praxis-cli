@@ -12,7 +12,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// ResetDNSCmd returns the `pangolin reset-dns` command which forcibly
+// ResetDNSCmd returns the `praxis reset-dns` command which forcibly
 // removes any stale DNS override left behind by a crashed client.
 func ResetDNSCmd() *cobra.Command {
 	var interfaceName string
@@ -30,7 +30,7 @@ active; use --force to override that check.`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			client := olm.NewClient("")
 			if client.IsRunning() && !force {
-				return errors.New("a client is currently running; stop it first with 'pangolin down' or rerun with --force")
+				return errors.New("a client is currently running; stop it first with 'praxis down' or rerun with --force")
 			}
 			if client.IsRunning() && force {
 				logger.Warning("Client appears to still be running; attempting reset anyway because --force was passed")
@@ -50,7 +50,7 @@ active; use --force to override that check.`,
 		},
 	}
 
-	cmd.Flags().StringVar(&interfaceName, "interface", "pangolin", "Tunnel interface name to clean up")
+	cmd.Flags().StringVar(&interfaceName, "interface", "praxis", "Tunnel interface name to clean up")
 	cmd.Flags().BoolVar(&force, "force", false, "Run the reset even if a client appears to be active")
 
 	return cmd

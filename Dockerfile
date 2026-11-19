@@ -19,13 +19,13 @@ COPY . .
 ARG VERSION=dev
 RUN NEWT_VERSION=$(go list -m -f '{{.Version}}' github.com/fosrl/newt | sed 's/^v//') && \
     OLM_VERSION=$(go list -m -f '{{.Version}}' github.com/fosrl/olm | sed 's/^v//') && \
-    CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w -X github.com/fosrl/cli/internal/version.Version=${VERSION} -X github.com/fosrl/cli/internal/version.NewtVersionOverride=${NEWT_VERSION} -X github.com/fosrl/cli/internal/version.OlmVersionOverride=${OLM_VERSION}" -o /pangolin-cli
+    CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w -X github.com/fosrl/cli/internal/version.Version=${VERSION} -X github.com/fosrl/cli/internal/version.NewtVersionOverride=${NEWT_VERSION} -X github.com/fosrl/cli/internal/version.OlmVersionOverride=${OLM_VERSION}" -o /praxis-cli
 
 FROM public.ecr.aws/docker/library/alpine:3.23 AS runner
 
 RUN apk --no-cache add ca-certificates tzdata iputils
 
-COPY --from=builder /pangolin-cli /usr/local/bin/
+COPY --from=builder /praxis-cli /usr/local/bin/
 COPY entrypoint.sh /
 
 # Admin/metrics endpoint (Prometheus scrape)
@@ -33,4 +33,4 @@ EXPOSE 2112
 
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["pangolin-cli"]
+CMD ["praxis-cli"]

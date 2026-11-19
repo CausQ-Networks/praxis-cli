@@ -22,4 +22,4 @@ jobs:
         env:
           NIXPKGS_ALLOW_UNFREE: "1"
         run: |
-          nix build .#pangolin-cli -L --impure
+          nix build .#praxis-cli -L --impure

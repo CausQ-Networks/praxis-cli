@@ -57,7 +57,7 @@ func (o OrgConfig) IsEmpty() bool {
 		o.ExitNodeTakesPrecedence == nil && o.MTU == nil && o.ExitNodeResourceID == nil
 }
 
-// UpConfig holds persistent defaults for pangolin up DNS-related flags.
+// UpConfig holds persistent defaults for praxis up DNS-related flags.
 // Pointer bools distinguish unset from explicitly false.
 type UpConfig struct {
 	TunnelDNS   *bool    `mapstructure:"tunnel_dns" json:"tunnel_dns,omitempty"`
@@ -67,14 +67,14 @@ type UpConfig struct {
 	// MatchDomains lists FQDN wildcard patterns (using * and ? wildcards, e.g.
 	// "*.proxy.internal") that olm should check against local records/upstream
 	// DNS. Queries for domains that don't match any pattern are sent directly to
-	// the host's system DNS servers. Used as the default for `pangolin up`'s
+	// the host's system DNS servers. Used as the default for `praxis up`'s
 	// --match-domains flag when the flag isn't passed explicitly. Empty means
 	// match every domain (the feature is disabled).
 	MatchDomains []string `mapstructure:"match_domains_dns" json:"match_domains_dns"`
 
 	// PreferLocalRoutes, when enabled, adds tunnel routes with a high metric so
 	// overlapping local/connected routes take precedence over the VPN route to
-	// the same destination. Used as the default for `pangolin up`'s
+	// the same destination. Used as the default for `praxis up`'s
 	// --prefer-local-routes flag when the flag isn't passed explicitly.
 	// Defaults to false.
 	PreferLocalRoutes *bool `mapstructure:"prefer_local_routes" json:"prefer_local_routes,omitempty"`
@@ -82,12 +82,12 @@ type UpConfig struct {
 	// ExitNodeTakesPrecedence, when enabled, stops routes from being added
 	// for individual resources and stops their aliases from being resolved,
 	// so all traffic is sent through the exit node instead of directly to
-	// resources. Used as the default for `pangolin up`'s
+	// resources. Used as the default for `praxis up`'s
 	// --exit-node-takes-precedence flag when the flag isn't passed
 	// explicitly. Defaults to false.
 	ExitNodeTakesPrecedence *bool `mapstructure:"exit_node_takes_precedence" json:"exit_node_takes_precedence,omitempty"`
 
-	// MTU is the tunnel MTU. Used as the default for `pangolin up`'s --mtu flag
+	// MTU is the tunnel MTU. Used as the default for `praxis up`'s --mtu flag
 	// when the flag isn't passed explicitly.
 	MTU *int `mapstructure:"mtu" json:"mtu,omitempty"`
 }
@@ -99,7 +99,7 @@ type CompanionAppDataDirs struct {
 	Linux   string `mapstructure:"linux" json:"linux,omitempty"`
 }
 
-// ConfigOptions is the registry of keys supported by pangolin config get/set/list.
+// ConfigOptions is the registry of keys supported by praxis config get/set/list.
 var ConfigOptions = []string{
 	"log_level",
 	"disable_update_check",
@@ -115,7 +115,7 @@ var ConfigOptions = []string{
 }
 
 // OrgConfigOptions is the registry of keys that can be set per org with
-// pangolin config set --org. up.exit_node_resource_id is only valid per org.
+// praxis config set --org. up.exit_node_resource_id is only valid per org.
 var OrgConfigOptions = []string{
 	"up.tunnel_dns",
 	"up.upstream_dns",
@@ -160,7 +160,7 @@ func companionAppDataDirForGOOS(c *Config, goos string) string {
 func newConfigViper() (*viper.Viper, error) {
 	v := viper.New()
 
-	dir, err := GetPangolinConfigDir()
+	dir, err := GetPraxisConfigDir()
 	if err != nil {
 		return nil, err
 	}
@@ -256,7 +256,7 @@ func (c *Config) GetStringSlice(key string) []string {
 
 // ConfigFilePath returns the path to the CLI config file.
 func ConfigFilePath() (string, error) {
-	dir, err := GetPangolinConfigDir()
+	dir, err := GetPraxisConfigDir()
 	if err != nil {
 		return "", err
 	}
@@ -570,7 +570,7 @@ func (c *Config) Save() error {
 		c.v.Set("orgs", c.Orgs)
 	}
 
-	dir, err := GetPangolinConfigDir()
+	dir, err := GetPraxisConfigDir()
 	if err != nil {
 		return err
 	}
@@ -592,16 +592,16 @@ func (c *Config) Save() error {
 	return c.v.WriteConfig()
 }
 
-// GetPangolinConfigDir returns the path to the .pangolin directory and ensures it exists
-func GetPangolinConfigDir() (string, error) {
+// GetPraxisConfigDir returns the path to the Praxis config directory and ensures it exists
+func GetPraxisConfigDir() (string, error) {
 	homeDir, err := userHomeDir()
 	if err != nil {
 		return "", fmt.Errorf("failed to get home directory: %w", err)
 	}
 
-	pangolinDir := filepath.Join(homeDir, ".config", "pangolin")
+	praxisDir := filepath.Join(homeDir, ".config", "praxis")
 
-	return pangolinDir, nil
+	return praxisDir, nil
 }
 
 // userHomeDir returns the home directory of the original user
@@ -638,7 +638,7 @@ func userHomeDir() (string, error) {
 
 // defaultLogPath returns the default log file path for client logs
 func defaultLogPath() string {
-	pangolinDir, err := GetPangolinConfigDir()
+	pangolinDir, err := GetPraxisConfigDir()
 	if err != nil {
 		return "/tmp/olm.log"
 	}
@@ -648,17 +648,17 @@ func defaultLogPath() string {
 }
 
 // GetFingerprintDir returns the directory for storing the platform fingerprint.
-// On Linux, this uses /etc/pangolin since the fingerprint is machine-specific
+// On Linux, this uses /etc/praxis since the fingerprint is machine-specific
 // and needs to be written by a privileged process but readable by all users.
 // On other platforms, it falls back to the user config directory.
 func GetFingerprintDir() (string, error) {
-	// On Linux, prefer /etc/pangolin for system-wide fingerprint storage
+	// On Linux, prefer /etc/praxis for system-wide fingerprint storage
 	if runtime.GOOS == "linux" {
-		return "/etc/pangolin", nil
+		return "/etc/praxis", nil
 	}
 
 	// On other platforms, use the user config directory
-	return GetPangolinConfigDir()
+	return GetPraxisConfigDir()
 }
 
 // GetFingerprintFilePath returns the full path to the platform fingerprint file.
