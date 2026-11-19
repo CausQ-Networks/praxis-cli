@@ -25,8 +25,8 @@ import (
 	"github.com/CausQ-Networks/praxis-cli/internal/tui"
 	"github.com/CausQ-Networks/praxis-cli/internal/utils"
 	versionpkg "github.com/CausQ-Networks/praxis-cli/internal/version"
-	newtLogger "github.com/fosrl/newt/logger"
-	olmpkg "github.com/fosrl/olm/olm"
+	newtLogger "github.com/CausQ-Networks/praxis-newt/logger"
+	olmpkg "github.com/CausQ-Networks/praxis-olm/olm"
 	"github.com/spf13/cobra"
 )
 

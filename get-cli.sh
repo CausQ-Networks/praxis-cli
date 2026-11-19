@@ -28,7 +28,7 @@ print_error() {
     printf '%b[ERROR]%b %s\n' "${RED}" "${NC}" "$1"
 }
 
-# Fetch latest CLI version from Fossorial versions API
+# Fetch latest CLI version from CausQ versions API
 get_latest_version() {
     latest_info=""
     if command -v curl >/dev/null 2>&1; then
@@ -215,7 +215,7 @@ restore_selinux_context() {
 }
 
 # Download and install Praxis
-install_pangolin() {
+install_praxis() {
     platform="$1"
     install_dir="$2"
     sudo_cmd="$3"
@@ -226,7 +226,7 @@ install_pangolin() {
     case "$platform" in
         *windows*)
             asset_name="${asset_name}.exe"
-            final_name="pangolin.exe"
+            final_name="praxis.exe"
             ;;
     esac
 
@@ -290,7 +290,7 @@ verify_installation() {
 
     if [ -x "$praxis_path" ]; then
         print_status "Installation successful!"
-        print_status "pangolin version: $("$praxis_path" version 2>/dev/null || printf 'unknown')"
+        print_status "praxis version: $("$praxis_path" version 2>/dev/null || printf 'unknown')"
         return 0
     else
         print_error "Installation failed. Binary not found or not executable."
@@ -342,12 +342,12 @@ main() {
         print_status "Root privileges required for installation to ${INSTALL_DIR}"
     fi
 
-    install_pangolin "$PLATFORM" "$INSTALL_DIR" "$SUDO_CMD" "$CUSTOM_PATH"
+    install_praxis "$PLATFORM" "$INSTALL_DIR" "$SUDO_CMD" "$CUSTOM_PATH"
 
     if [ -n "$CUSTOM_PATH" ]; then
         if [ -x "$CUSTOM_PATH" ]; then
             print_status "Installation successful!"
-            print_status "pangolin version: $("$CUSTOM_PATH" version 2>/dev/null || printf 'unknown')"
+            print_status "praxis version: $("$CUSTOM_PATH" version 2>/dev/null || printf 'unknown')"
             print_status "Praxis is ready to use!"
         else
             print_error "Installation failed. Binary not found or not executable at ${CUSTOM_PATH}."

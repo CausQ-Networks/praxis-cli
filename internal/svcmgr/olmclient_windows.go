@@ -12,8 +12,8 @@ import (
 	"github.com/CausQ-Networks/praxis-cli/internal/branding"
 	"github.com/CausQ-Networks/praxis-cli/internal/olm"
 	versionpkg "github.com/CausQ-Networks/praxis-cli/internal/version"
-	newtLogger "github.com/fosrl/newt/logger"
-	olmpkg "github.com/fosrl/olm/olm"
+	newtLogger "github.com/CausQ-Networks/praxis-newt/logger"
+	olmpkg "github.com/CausQ-Networks/praxis-olm/olm"
 	"golang.org/x/sys/windows/svc"
 	"golang.org/x/sys/windows/svc/eventlog"
 )
@@ -23,7 +23,7 @@ import (
 // `praxis up client` child process - that command has no standalone
 // Windows console mode, since interactive tunnel management on Windows is
 // the Praxis desktop app's job, not the CLI's. Instead, mirroring how
-// olm's own Windows service (github.com/fosrl/olm's service_windows.go)
+// olm's own Windows service (github.com/CausQ-Networks/praxis-olm's service_windows.go)
 // works, it runs the tunnel directly in-process via the vendored olm
 // package.
 type olmHostedService struct {

@@ -17,8 +17,8 @@ COPY . .
 
 # Build the application
 ARG VERSION=dev
-RUN NEWT_VERSION=$(go list -m -f '{{.Version}}' github.com/fosrl/newt | sed 's/^v//') && \
-    OLM_VERSION=$(go list -m -f '{{.Version}}' github.com/fosrl/olm | sed 's/^v//') && \
+RUN NEWT_VERSION=$(go list -m -f '{{.Version}}' github.com/CausQ-Networks/praxis-newt | sed 's/^v//') && \
+    OLM_VERSION=$(go list -m -f '{{.Version}}' github.com/CausQ-Networks/praxis-olm | sed 's/^v//') && \
     CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w -X github.com/CausQ-Networks/praxis-cli/internal/version.Version=${VERSION} -X github.com/CausQ-Networks/praxis-cli/internal/version.NewtVersionOverride=${NEWT_VERSION} -X github.com/CausQ-Networks/praxis-cli/internal/version.OlmVersionOverride=${OLM_VERSION}" -o /praxis-cli
 
 FROM public.ecr.aws/docker/library/alpine:3.23 AS runner

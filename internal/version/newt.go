@@ -5,9 +5,9 @@ import "runtime/debug"
 // newtModulePath is the module path of the embedded newt package whose
 // version is reported to the server, since the CLI runs newt's own runtime
 // code directly rather than shelling out to a standalone newt binary.
-const newtModulePath = "github.com/fosrl/newt"
+const newtModulePath = "github.com/CausQ-Networks/praxis-newt"
 
-// NewtVersionOverride is the version of the github.com/fosrl/newt module
+// NewtVersionOverride is the version of the github.com/CausQ-Networks/praxis-newt module
 // this binary was built against (with any "v" prefix stripped), as read
 // from go.mod by the build process.
 //
@@ -16,7 +16,7 @@ const newtModulePath = "github.com/fosrl/newt"
 // is stripped or size-optimized in a way that drops Go build info.
 var NewtVersionOverride string
 
-// NewtVersion returns the version of the github.com/fosrl/newt module this
+// NewtVersion returns the version of the github.com/CausQ-Networks/praxis-newt module this
 // binary was built against. It prefers NewtVersionOverride (set at build
 // time via -ldflags); if that wasn't set - e.g. a plain `go build` or
 // `go run` invocation that bypasses the Makefile - it falls back to reading

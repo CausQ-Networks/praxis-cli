@@ -4,8 +4,8 @@ BINARY_NAME=praxis
 OUTPUT_DIR=bin
 
 VERSION ?= dev
-NEWT_VERSION := $(shell go list -m -f '{{.Version}}' github.com/fosrl/newt | sed 's/^v//')
-OLM_VERSION := $(shell go list -m -f '{{.Version}}' github.com/fosrl/olm | sed 's/^v//')
+NEWT_VERSION := $(shell go list -m -f '{{.Version}}' github.com/CausQ-Networks/praxis-newt | sed 's/^v//')
+OLM_VERSION := $(shell go list -m -f '{{.Version}}' github.com/CausQ-Networks/praxis-olm | sed 's/^v//')
 LDFLAGS = -s -w -X github.com/CausQ-Networks/praxis-cli/internal/version.Version=$(VERSION) -X github.com/CausQ-Networks/praxis-cli/internal/version.NewtVersionOverride=$(NEWT_VERSION) -X github.com/CausQ-Networks/praxis-cli/internal/version.OlmVersionOverride=$(OLM_VERSION)
 
 all: clean build
@@ -36,7 +36,7 @@ endif
 	@echo "Documentation generated in docs/"
 
 docker-build:
-	docker build -t fosrl/praxis-cli:latest .
+	docker build -t causq-networks/praxis-cli:latest .
 
 docker-build-release:
 	@if [ -z "$(tag)" ]; then \
@@ -45,8 +45,8 @@ docker-build-release:
 	fi
 	docker buildx build . \
 		--platform linux/arm/v7,linux/arm64,linux/amd64 \
-		-t fosrl/praxis-cli:latest \
-		-t fosrl/praxis-cli:$(tag) \
+		-t causq-networks/praxis-cli:latest \
+		-t causq-networks/praxis-cli:$(tag) \
 		-f Dockerfile \
 		--push
 

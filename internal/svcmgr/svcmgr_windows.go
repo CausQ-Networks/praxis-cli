@@ -37,7 +37,7 @@ var ErrElevationRequired = errors.New("this command must be run from an elevated
 // client service: `praxis up client` has no standalone Windows console
 // mode (see runOlmClient below for why), so that service instead runs the
 // olm tunnel directly in-process, the same way olm's own Windows service
-// (github.com/fosrl/olm's service_windows.go) does.
+// (github.com/CausQ-Networks/praxis-olm's service_windows.go) does.
 const (
 	hostMarker    = "__praxis-service-host"
 	olmHostMarker = "__praxis-service-host-olm"

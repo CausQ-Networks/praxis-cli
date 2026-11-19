@@ -1,5 +1,5 @@
 {
-  description = "praxis-cli - a VPN client for pangolin";
+  description = "praxis-cli - a VPN client for Praxis";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -33,7 +33,7 @@
           ];
 
           meta = with pkgs.lib; {
-            description = "A VPN client for pangolin";
+            description = "A VPN client for Praxis";
             homepage = "https://github.com/CausQ-Networks/praxis-cli";
             license = licenses.unfree;
             maintainers = [];

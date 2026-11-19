@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/CausQ-Networks/praxis-cli/internal/logger"
-	dnsOverride "github.com/fosrl/olm/dns/override"
+	dnsOverride "github.com/CausQ-Networks/praxis-olm/dns/override"
 	"github.com/spf13/cobra"
 )
 

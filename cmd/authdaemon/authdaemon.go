@@ -11,7 +11,7 @@ import (
 	"syscall"
 
 	"github.com/CausQ-Networks/praxis-cli/internal/logger"
-	authdaemonpkg "github.com/fosrl/newt/authdaemon"
+	authdaemonpkg "github.com/CausQ-Networks/praxis-newt/authdaemon"
 	"github.com/spf13/cobra"
 )
 

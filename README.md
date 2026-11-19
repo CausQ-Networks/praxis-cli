@@ -8,13 +8,13 @@ Official CLI and client for [Praxis](https://praxis.causq.com) by CausQ Networks
 github.com/CausQ-Networks/praxis-cli
 ```
 
-Upstream data-plane libraries remain `github.com/fosrl/newt` and `github.com/fosrl/olm` (they still read `PANGOLIN_ENDPOINT`; the CLI sets that alongside `PRAXIS_ENDPOINT`).
+Data-plane libraries are `github.com/CausQ-Networks/praxis-newt` and `github.com/CausQ-Networks/praxis-olm` (CLI sets `PRAXIS_ENDPOINT` and mirrors `PANGOLIN_ENDPOINT` for compatibility).
 
 ## Defaults
 
 | Setting | Value |
 | --- | --- |
-| Cloud control plane | `https://app.praxis.causq.com` |
+| Cloud control plane | `https://praxis.causq.com` (app.praxis.causq.com once DNS is attached) |
 | Static CDN / installer | `https://praxis.causq.com/get-cli.sh` |
 | Config dir | `~/.config/praxis` |
 | Env prefix | `PRAXIS_CLI_*` |

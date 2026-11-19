@@ -11,7 +11,7 @@ import (
 
 	"github.com/CausQ-Networks/praxis-cli/internal/api"
 	"github.com/CausQ-Networks/praxis-cli/internal/config"
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 	"github.com/spf13/cobra"
 )
 

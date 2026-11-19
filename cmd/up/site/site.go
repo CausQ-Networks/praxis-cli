@@ -1,7 +1,7 @@
 // Package site implements `praxis up site`, which runs a Newt site
 // tunnel embedded directly in the Praxis CLI. It accepts exactly the same
 // command-line flags and environment variables as the standalone newt
-// binary (see github.com/fosrl/newt), reusing newt's own config-loading and
+// binary (see github.com/CausQ-Networks/praxis-newt), reusing newt's own config-loading and
 // runtime packages rather than re-implementing them.
 package site
 
@@ -19,12 +19,12 @@ import (
 
 	"github.com/CausQ-Networks/praxis-cli/internal/config"
 	versionpkg "github.com/CausQ-Networks/praxis-cli/internal/version"
-	"github.com/fosrl/newt/clients/permissions"
-	newtLogger "github.com/fosrl/newt/logger"
-	newtpkg "github.com/fosrl/newt/newt"
-	"github.com/fosrl/newt/newtconfig"
-	"github.com/fosrl/newt/updates"
-	"github.com/fosrl/newt/websocket"
+	"github.com/CausQ-Networks/praxis-newt/clients/permissions"
+	newtLogger "github.com/CausQ-Networks/praxis-newt/logger"
+	newtpkg "github.com/CausQ-Networks/praxis-newt/newt"
+	"github.com/CausQ-Networks/praxis-newt/newtconfig"
+	"github.com/CausQ-Networks/praxis-newt/updates"
+	"github.com/CausQ-Networks/praxis-newt/websocket"
 	"github.com/spf13/cobra"
 )
 
