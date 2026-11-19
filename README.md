@@ -1,5 +1,14 @@
 # Praxis CLI
 
+<div align="center">
+  <a href="https://praxis.causq.com/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/CausQ-Networks/praxis/main/public/logo/praxis-logo-white.png">
+      <img alt="Praxis Logo" src="https://raw.githubusercontent.com/CausQ-Networks/praxis/main/public/logo/praxis-logo.png" width="280">
+    </picture>
+  </a>
+</div>
+
 [![Discord](https://img.shields.io/discord/1572896060949659679?logo=discord&style=flat-square&label=Discord)](https://praxis.causq.com/discord/)
 
 Official CLI and client for [Praxis](https://praxis.causq.com) by CausQ Networks.
@@ -10,7 +19,7 @@ Official CLI and client for [Praxis](https://praxis.causq.com) by CausQ Networks
 github.com/CausQ-Networks/praxis-cli
 ```
 
-Data-plane libraries are `github.com/CausQ-Networks/praxis-newt` and `github.com/CausQ-Networks/praxis-olm` (CLI sets `PRAXIS_ENDPOINT` and mirrors `PANGOLIN_ENDPOINT` for compatibility).
+Data-plane libraries are `github.com/CausQ-Networks/praxis-newt` and `github.com/CausQ-Networks/praxis-olm` (CLI sets `PRAXIS_ENDPOINT` and also accepts legacy `PANGOLIN_ENDPOINT` for compatibility).
 
 ## Defaults
 
